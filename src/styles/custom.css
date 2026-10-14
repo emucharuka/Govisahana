@@ -1,0 +1,75 @@
+/* Agritech Theme Custom CSS Tokens & Animations */
+:root {
+  --agri-green-primary: #1B5E20;
+  --agri-green-mid: #2E7D32;
+  --agri-green-light: #4CAF50;
+  --agri-green-pale: #E8F5E9;
+  --agri-earth-brown: #5D4037;
+  --agri-soil-amber: #D84315;
+  --agri-bg-sage: #F3F6F3;
+}
+
+body {
+  font-family: 'Outfit', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--agri-bg-sage);
+  color: #1A202C;
+}
+
+/* Glassmorphism elements */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(46, 125, 50, 0.12);
+}
+
+.glass-nav {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(46, 125, 50, 0.15);
+}
+
+/* Glowing pulse for active consultation state */
+@keyframes pulse-emerald {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(46, 125, 50, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(46, 125, 50, 0);
+  }
+}
+
+.pulse-badge {
+  animation: pulse-emerald 2s infinite;
+}
+
+/* Custom scrollbars for chat room */
+.chat-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.chat-scroll::-webkit-scrollbar-track {
+  background: #F1F5F1;
+}
+.chat-scroll::-webkit-scrollbar-thumb {
+  background: #A5D6A7;
+  border-radius: 4px;
+}
+.chat-scroll::-webkit-scrollbar-thumb:hover {
+  background: #2E7D32;
+}
+
+/* Accessibility Focus Ring */
+button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 3px solid #2E7D32;
+  outline-offset: 2px;
+}
+
+/* Language Badge */
+.lang-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background-color: #E8F5E9;
+  color: #1B5E20;
+}

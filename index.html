@@ -1,0 +1,2731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+  <title>GoviSahana • Cultivating knowledge, together</title>
+  
+  <!-- SEO & Meta Tags -->
+  <meta name="description" content="GoviSahana — Cultivating knowledge, together. Empowering Sri Lankan agriculture." />
+  <meta name="theme-color" content="#1B5E20" />
+
+  <!-- Google Fonts: Outfit, Inter & Noto Sans Sinhala -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&family=Noto+Sans+Sinhala:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            emerald: {
+              50: '#F4F9F5',
+              100: '#E8F5E9',
+              200: '#C8E6C9',
+              300: '#A5D6A7',
+              400: '#66BB6A',
+              500: '#4CAF50',
+              600: '#43A047',
+              700: '#2E7D32',
+              800: '#1B5E20',
+              900: '#0F3813',
+              950: '#09240B',
+            }
+          },
+          fontFamily: {
+            sans: ['Outfit', 'Noto Sans Sinhala', 'Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- React 18 & Babel Standalone -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <!-- 3D Bento & Theme Dynamic Physics CSS -->
+  <style>
+    /* Dark Theme System */
+    body.dark-mode {
+      --bg-color: #071208;
+      --text-color: #F1F5F1;
+      --card-bg: rgba(13, 31, 18, 0.75);
+      --card-border: rgba(76, 175, 80, 0.25);
+      --nav-bg: rgba(7, 18, 8, 0.88);
+      --spotlight-glow: rgba(76, 175, 80, 0.25);
+      --ambient-primary: rgba(46, 125, 50, 0.25);
+      --ambient-secondary: rgba(216, 67, 21, 0.15);
+    }
+
+    /* Light Theme System */
+    body.light-mode {
+      --bg-color: #F3F6F3;
+      --text-color: #0F2B14;
+      --card-bg: rgba(255, 255, 255, 0.92);
+      --card-border: rgba(46, 125, 50, 0.18);
+      --nav-bg: rgba(255, 255, 255, 0.95);
+      --spotlight-glow: rgba(46, 125, 50, 0.12);
+      --ambient-primary: rgba(76, 175, 80, 0.12);
+      --ambient-secondary: rgba(255, 193, 7, 0.12);
+    }
+
+    @media print {
+      header, footer, .no-print {
+        display: none !important;
+      }
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+      }
+      .printable-prescription {
+        border: 2px solid #1b5e20 !important;
+        background: #ffffff !important;
+        color: #000000 !important;
+        box-shadow: none !important;
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+    }
+
+    html, body {
+      max-width: 100vw;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    #root {
+      width: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Outfit', 'Noto Sans Sinhala', 'Inter', system-ui, -apple-system, sans-serif;
+      transition: background-color 0.4s ease, color 0.4s ease;
+    }
+
+    /* Sinhala Optical Alignment & Font Scaling System */
+    body.lang-si {
+      font-family: 'Noto Sans Sinhala', 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    body.lang-si .brand-title {
+      line-height: 1.35 !important;
+      font-size: 1.05rem !important;
+    }
+
+    body.lang-si .brand-subtitle {
+      line-height: 1.35 !important;
+      font-size: 0.7rem !important;
+    }
+
+    body.lang-si h1 {
+      line-height: 1.3 !important;
+    }
+
+    body.lang-si h2 {
+      font-size: 0.9em !important;
+      line-height: 1.3 !important;
+    }
+
+    body.lang-si h3 {
+      font-size: 0.92em !important;
+      line-height: 1.35 !important;
+    }
+
+    body.lang-si h4 {
+      font-size: 0.94em !important;
+    }
+
+    body.lang-si p {
+      font-size: 0.95em !important;
+      line-height: 1.6 !important;
+    }
+
+    body.lang-si button {
+      font-size: 0.94em !important;
+    }
+
+    /* Radial Ambient Background Glows */
+    .bg-ambient-glow {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background: 
+        radial-gradient(800px circle at var(--parallax-x, 50%) var(--parallax-y, 30%), var(--ambient-primary), transparent 60%),
+        radial-gradient(600px circle at calc(100% - var(--parallax-x, 50%)) calc(100% - var(--parallax-y, 50%)), var(--ambient-secondary), transparent 50%);
+      transition: background 0.4s ease;
+    }
+
+    /* Glassmorphic 3D Cards */
+    .glass-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--card-border);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      position: relative;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s, background-color 0.4s;
+    }
+
+    .glass-card:hover {
+      border-color: rgba(76, 175, 80, 0.5);
+    }
+
+    /* Dynamic Cursor Spotlight Radial Glow */
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), var(--spotlight-glow), transparent 40%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .glass-card:hover::before {
+      opacity: 1;
+    }
+
+    /* Glass Header */
+    .glass-nav {
+      background: var(--nav-bg);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--card-border);
+      transition: background-color 0.4s ease;
+    }
+
+    /* Scrollbars */
+    .chat-scroll::-webkit-scrollbar { width: 6px; }
+    .chat-scroll::-webkit-scrollbar-track { background: transparent; }
+    .chat-scroll::-webkit-scrollbar-thumb { background: #2E7D32; border-radius: 4px; }
+
+    /* Agricultural Atmospheric Background Layer */
+    .bg-photo-layer {
+      position: fixed;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=2000&q=80');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      pointer-events: none;
+      z-index: 0;
+      transition: opacity 0.4s ease, filter 0.4s ease;
+    }
+
+    body.dark-mode .bg-photo-layer {
+      opacity: 0.18;
+      filter: saturate(1.3) contrast(1.15) brightness(0.85);
+    }
+
+    body.light-mode .bg-photo-layer {
+      opacity: 0.10;
+      filter: saturate(1.2) brightness(1.05);
+    }
+  </style>
+</head>
+<body class="light-mode">
+
+  <!-- Atmospheric Agricultural Background & Ambient Glow -->
+  <div class="bg-photo-layer" id="photo-bg"></div>
+  <div class="bg-ambient-glow" id="ambient-glow"></div>
+
+  <div id="root" style="position: relative; z-index: 1;"></div>
+
+  <!-- Background Parallax Ambient Script -->
+  <script>
+    window.addEventListener('mousemove', (e) => {
+      const px = (e.clientX / window.innerWidth) * 100;
+      const py = (e.clientY / window.innerHeight) * 100;
+      document.documentElement.style.setProperty('--parallax-x', `${px}%`);
+      document.documentElement.style.setProperty('--parallax-y', `${py}%`);
+    });
+  </script>
+
+  <!-- React Application Script -->
+  <script type="text/babel">
+    const { useState, useRef, useEffect } = React;
+
+    // --- CONSTANTS ---
+    const SRI_LANKAN_DISTRICTS = [
+      "Anuradhapura", "Polonnaruwa", "Badulla", "Kurunegala", "Kandy", "Matale", 
+      "Nuwara Eliya", "Monaragala", "Ampara", "Batticaloa", "Trincomalee", "Jaffna", 
+      "Kilinochchi", "Mannar", "Mullaitivu", "Vavuniya", "Puttalam", "Ratnapura", 
+      "Kegalle", "Galle", "Matara", "Hambantota", "Colombo", "Gampaha", "Kalutara"
+    ];
+
+    const CROP_CATEGORIES = [
+      { id: 'paddy', label: 'Paddy / Rice (වී)' },
+      { id: 'tea', label: 'Tea (තේ)' },
+      { id: 'coconut', label: 'Coconut (පොල්)' },
+      { id: 'rubber', label: 'Rubber (රබර්)' },
+      { id: 'vegetables', label: 'Vegetables (එළවළු)' },
+      { id: 'spices', label: 'Spices / Cinnamon (කුළුබඩු / කුරුඳු)' }
+    ];
+
+    const PRESET_DIAGNOSES = [
+      {
+        name: "Paddy Blast (Magnaporthe oryzae)",
+        treatment: "Spray Tricyclazole 75% WP or Edifenphos 50% EC",
+        dosage: "0.6 grams per 1 Liter of clean water",
+        timing: "Apply early morning before 9:00 AM. Avoid rainy conditions."
+      },
+      {
+        name: "Bacterial Leaf Blight (Xanthomonas oryzae)",
+        treatment: "Apply Copper Oxychloride 50% WP + Streptocycline",
+        dosage: "2.5g Copper Oxychloride per 1 Liter water",
+        timing: "Drain standing water from field for 3 days before spraying."
+      },
+      {
+        name: "Fall Armyworm (Spodoptera frugiperda)",
+        treatment: "Spinotoram 11.7% SC or Emamectin Benzoate 5% SG",
+        dosage: "0.4ml Spinotoram per 1 Liter of water",
+        timing: "Target leaf whorls late in the evening (after 5:00 PM)."
+      },
+      {
+        name: "Coconut Caterpillar Pest (Nephantis serinopa)",
+        treatment: "Release Parasitoids (Goniozus nephantidis) & Neem oil spray",
+        dosage: "5ml Neem Seed Kernel Extract per 1 Liter water",
+        timing: "Apply to underside of lower fronds during dry period."
+      }
+    ];
+
+    // --- I18N TRANSLATIONS ---
+    const TRANSLATIONS = {
+      en: {
+        brandName: "GoviSahana",
+        brandSubtitle: "Cultivating knowledge, together",
+        sinhalaTagline: "Empowering Sri Lankan agriculture",
+        footerCopyright: "© 2026 GoviSahana — Cultivating knowledge, together.",
+        footerTagline: "Empowering Sri Lankan agriculture.",
+        navHome: "Home",
+        navFarmerPortal: "Farmer Portal",
+        navChatRoom: "Chat Room",
+        navExpertDesk: "Expert Desk",
+        navLogIn: "Log In",
+        navSignUp: "Sign Up",
+        navLogOut: "Log Out",
+        navProfile: "Profile",
+        navAuthRequired: "Sign in required to access portal",
+        heroBadge: "Sri Lanka's Premier Agritech Platform",
+        heroTitleLine1: "Bridging Rural Farmers with",
+        heroTitleLine2: "Verified Agricultural Experts",
+        heroDescription: "Real-time crop disease diagnosis, soil health guidance, and expert consultation for Sri Lankan farmers. Connect directly with Department of Agriculture extension officers.",
+        heroAuthNotice: "Please Sign Up or Log In first to create consultation requests and connect with experts!",
+        farmerCardTitle: "I am a Farmer",
+        farmerCardDesc: "Need quick help for leaf yellowing, pest damage, or fertilizer rates? Register your profile to submit crop photos.",
+        farmerCardBtn: "Create Farmer Account (Sign Up)",
+        farmerCardAltBtn: "Already registered? Log In →",
+        farmerCardBadge: "For Farmers",
+        expertCardTitle: "I am an Agricultural Expert",
+        expertCardDesc: "Extension officers & agronomists can review farmer requests, inspect crop disease photos, and prescribe remote guidance.",
+        expertCardBtn: "Register Expert Account",
+        expertCardAltBtn: "Expert Log In →",
+        expertCardBadge: "For Experts",
+        featuresTitle: "Designed for Rural Sri Lankan Agriculture",
+        feature1Title: "Photo Disease Inspection",
+        feature1Desc: "Snap a clear photo of infected leaves or soil. Experts analyze leaf spotting or fungi instantly.",
+        feature2Title: "Multi-Channel Support",
+        feature2Desc: "Choose chat messages, voice notes, or video consultation with local extension officers.",
+        feature3Title: "Digital Remedy Cards",
+        feature3Desc: "Receive structured prescription cards with exact dosage, timing, and safety precautions.",
+        loginTitle: "Log In to GoviSahana",
+        loginSubtitle: "Sign in with your mobile number to access your consultations",
+        loginSelectRole: "Select Account Role:",
+        loginPhoneLabel: "Mobile Phone Number",
+        loginBtnSubmit: "Send Mobile OTP SMS",
+        loginBtnVerify: "Verify Code & Log In",
+        loginNoAccount: "New to GoviSahana?",
+        loginRegisterLink: "Create Account (Sign Up) →",
+        signupTitle: "Register for GoviSahana",
+        signupSubtitle: "Create your verified profile for Sri Lankan agricultural mentorship",
+        signupRoleFarmer: "Farmer",
+        signupRoleExpert: "Agricultural Expert",
+        signupFullName: "Full Name *",
+        signupMobile: "Mobile Phone (+94) *",
+        signupDistrict: "District *",
+        signupCrops: "Primary Crop Cultivated *",
+        signupDepartment: "Department / Institution *",
+        signupDesignation: "Designation / Specialization *",
+        signupSubmit: "Register Account & Log In →",
+        signupHasAccount: "Already registered?",
+        signupLoginLink: "Log In Here →",
+        dashboardSeason: "Maha Season 2026",
+        dashboardGreeting: "Welcome",
+        dashboardVerifiedBadge: "Verified Farmer Account",
+        btnRequestConsultation: "REQUEST CONSULTATION",
+        needCropAdvice: "Need Crop Advice?",
+        statActiveChats: "Active Chats",
+        statPendingRequests: "Pending Requests",
+        statResolvedCases: "Resolved Cases",
+        statAssignedOfficers: "Assigned Officers",
+        dashboardSectionTitle: "Your Consultation Requests",
+        btnJoinChatRoom: "Join Chat Room →",
+        modalTitle: "Request New Consultation",
+        modalIssueTitle: "Issue Title / Summary *",
+        modalCropType: "Crop Category *",
+        modalDesc: "Detailed Description & Symptoms *",
+        modalUploadPhoto: "Upload Crop Photo (Crucial) *",
+        modalUploadPhotoHint: "Tap to Upload Photo or Drag Image Here",
+        modalSubmit: "Submit Consultation Request →",
+        chatDashboardBack: "← Dashboard",
+        chatOfficerBadge: "Verified Officer",
+        btnVoiceCall: "Voice Call",
+        btnVideoCall: "Video Call",
+        chatPhotoAttached: "Crop Photo Attached",
+        chatInputPlaceholder: "Type your crop query here...",
+        btnSend: "Send",
+        expertDeskTitle: "Extension Officer Desk",
+        expertQueueTitle: "Farmer Queries Queue",
+        btnOpenChat: "Open Chat Room →",
+        filterSearchPlaceholder: "Search by title, farmer name, or district...",
+        filterAllStatus: "All Statuses",
+        filterPending: "Pending",
+        filterInProgress: "In Progress",
+        filterResolved: "Resolved",
+        btnIssuePrescription: "Issue Digital Remedy Prescription",
+        prescriptionTitle: "Issue Official Agronomist Prescription",
+        prescriptionSelectPreset: "Select Common Diagnosis Template (Optional)",
+        prescriptionDiagnosis: "Disease / Pest Diagnosis Name *",
+        prescriptionTreatment: "Recommended Chemical / Remedy *",
+        prescriptionDosage: "Exact Mixing & Dosage Instructions *",
+        prescriptionTiming: "Application Timing & Precautions *",
+        btnSubmitPrescription: "Issue & Send Prescription to Farmer",
+        btnPrintPrescription: "Print / Save PDF",
+        btnMarkResolved: "Mark Case as Resolved",
+        playVoiceNote: "Listen to Voice Message from Expert (0:45)"
+      },
+      si: {
+        brandName: "GoviSahana",
+        brandSubtitle: "එක්ව දැනුම වගා කරමු",
+        sinhalaTagline: "ශ්‍රී ලංකා කෘෂිකර්මාන්තය බලගන්වමින්",
+        footerCopyright: "© 2026 GoviSahana — එක්ව දැනුම වගා කරමු.",
+        footerTagline: "ශ්‍රී ලංකා කෘෂිකර්මාන්තය බලගන්වමින්.",
+        navHome: "මුල් පිටුව",
+        navFarmerPortal: "ගොවි ද්වාරය",
+        navChatRoom: "සංවාද ගැබ",
+        navExpertDesk: "උපදේශක පීඨය",
+        navLogIn: "ඇතුල් වන්න",
+        navSignUp: "ලියාපදිංචි වන්න",
+        navLogOut: "නික්මෙන්න",
+        navProfile: "පැතිකඩ",
+        navAuthRequired: "ද්වාරයට පිවිසීමට ඇතුල් වීම අවශ්‍යයි",
+        heroBadge: "ශ්‍රී ලංකාවේ ප්‍රමුඛතම කෘෂිතාක්ෂණික වේදිකාව",
+        heroTitleLine1: "දේශීය ගොවි මහතුන්",
+        heroTitleLine2: "කෘෂිකාර්මික උපදේශකවරුන් හා සම්බන්ධ කිරීම",
+        heroDescription: "බෝග රෝග හඳුනාගැනීම, පසෙහි සෞඛ්‍යය සහ කෘෂිකාර්මික උපදෙස් සිංහලෙන් ලබාගන්න. කෘෂිකර්ම දෙපාර්තමේන්තුවේ උපදේශක නිලධාරීන් හා සෘජුවම සම්බන්ධ වන්න.",
+        heroAuthNotice: "උපදෙස් ඉල්ලුම් කිරීමට කරුණාකර පළමුව ලියාපදිංචි වන්න හෝ ඇතුල් වන්න!",
+        farmerCardTitle: "මම ගොවියෙක් (ගොවි මහතුන් සඳහා)",
+        farmerCardDesc: "කොළ කහ වීම, පලිබෝධ හානි හෝ පොහොර මාත්‍රා ගැන උපදෙස් අවශ්‍යද? ඔබගේ බෝග ඡායාරූප යැවීමට ගිණුමක් සාදාගන්න.",
+        farmerCardBtn: "ගොවි ගිණුමක් සාදාගන්න (Sign Up)",
+        farmerCardAltBtn: "ලියාපදිංචි වී ඇත්නම් ඇතුල් වන්න →",
+        farmerCardBadge: "ගොවි මහතුන් සඳහා",
+        expertCardTitle: "මම කෘෂිකාර්මික උපදේශකයෙක්",
+        expertCardDesc: "කෘෂිකාර්මික නිලධාරීන්ට ගොවි ඉල්ලීම් පරීක්ෂා කර, බෝග ඡායාරූප අධ්‍යයනය කර දුරස්ථ උපදෙස් ලබාදිය හැක.",
+        expertCardBtn: "උපදේශක ගිණුමක් සාදාගන්න",
+        expertCardAltBtn: "උපදේශක ඇතුල් වීම →",
+        expertCardBadge: "උපදේශකවරුන් සඳහා",
+        featuresTitle: "ශ්‍රී ලාංකීය කෘෂිකර්මාන්තයටම විශේෂිතයි",
+        feature1Title: "ඡායාරූප මගින් රෝග හඳුනාගැනීම",
+        feature1Desc: "හානි වූ පත්‍රවල හෝ පසේ පැහැදිලි ඡායාරූපයක් යවන්න. විශේෂඥයින් ක්ෂණිකව විශ්ලේෂණය කරයි.",
+        feature2Title: "බහු-මාධ්‍ය සම්බන්ධතාව",
+        feature2Desc: "පණිවිඩ, කටහඬ සටහන් (Voice Notes) හෝ වීඩියෝ උපදේශන තෝරාගන්න.",
+        feature3Title: "ඩිජිටල් ඖෂධ වට්ටෝරු",
+        feature3Desc: "නිවැරදි මාත්‍රාව, භාවිත කරන වේලාව සහ ආරක්ෂිත ක්‍රමවේද ඇතුළත් කාඩ්පතක් ලබාගන්න.",
+        loginTitle: "ගොවි සහන වෙත ඇතුල් වන්න",
+        loginSubtitle: "ඔබගේ දුරකථන අංකයෙන් ඇතුල් වී සංවාද වෙත පිවිසෙන්න",
+        loginQuickDemo: "ක්ෂණික පිවිසුම (Demo)",
+        loginDemoFarmer: "ගොවි පිවිසුම (සුනිල්)",
+        loginDemoExpert: "උපදේශක පිවිසුම (දොස්තර නිමල්)",
+        loginSelectRole: "ගිණුම් වර්ගය තෝරන්න:",
+        loginPhoneLabel: "දුරකථන අංකය",
+        loginBtnSubmit: "SMS OTP කේතය එවන්න",
+        loginBtnVerify: "තහවුරු කර ඇතුල් වන්න",
+        loginNoAccount: "තවම ගිණුමක් නැතිද?",
+        loginRegisterLink: "ලියාපදිංචි වන්න (Sign Up) →",
+        signupTitle: "ගොවි සහන සඳහා ලියාපදිංචි වන්න",
+        signupSubtitle: "කෘෂිකාර්මික උපදෙස් ලබාගැනීමට ඔබගේ පැතිකඩ සාදන්න",
+        signupRoleFarmer: "ගොවි",
+        signupRoleExpert: "කෘෂිකාර්මික උපදේශක",
+        signupFullName: "සම්පූර්ණ නම *",
+        signupMobile: "දුරකථන අංකය (+94) *",
+        signupDistrict: "දිස්ත්‍රික්කය *",
+        signupCrops: "වගා කරන ප්‍රධාන බෝගය *",
+        signupDepartment: "දෙපාර්තමේන්තුව / ආයතනය *",
+        signupDesignation: "තනතුර / විශේෂඥතාව *",
+        signupSubmit: "ලියාපදිංචි වී ඇතුල් වන්න →",
+        signupHasAccount: "ලියාපදිංචි වී ඇත්නම්?",
+        signupLoginLink: "මෙහිදී ඇතුල් වන්න →",
+        dashboardSeason: "මහ කන්නය 2026",
+        dashboardGreeting: "ආයුබෝවන් ගොවි මහතාණෙනි",
+        dashboardVerifiedBadge: "තහවුරු කළ ගොවි ගිණුම",
+        btnRequestConsultation: "උපදෙස් ලබාගන්න",
+        needCropAdvice: "බෝග උපදෙස් අවශ්‍යද?",
+        statActiveChats: "සක්‍රීය සංවාද",
+        statPendingRequests: "පොරොත්තු ඉල්ලීම්",
+        statResolvedCases: "විසඳූ ගැටලු",
+        statAssignedOfficers: "අනුයුක්ත නිලධාරීන්",
+        dashboardSectionTitle: "ඔබගේ උපදේශන ඉල්ලීම්",
+        btnJoinChatRoom: "සංවාදයට එක්වන්න →",
+        modalTitle: "නව උපදේශන ඉල්ලීමක් සාදන්න",
+        modalIssueTitle: "ගැටලුවේ මාතෘකාව *",
+        modalCropType: "බෝග වර්ගය *",
+        modalDesc: "විස්තරය සහ රෝග ලක්ෂණ *",
+        modalUploadPhoto: "බෝගයේ ඡායාරූපය එක් කරන්න (අත්‍යවශ්‍යයි) *",
+        modalUploadPhotoHint: "ඡායාරූපයක් එක් කිරීමට මෙතන ඔබන්න",
+        modalSubmit: "උපදේශන ඉල්ලීම යොමු කරන්න →",
+        chatDashboardBack: "← පුවරුවට",
+        chatOfficerBadge: "✓ නියමිත නිලධාරී",
+        btnVoiceCall: "📞 කටහඬ ඇමතුම",
+        btnVideoCall: "📹 වීඩියෝ ඇමතුම",
+        chatPhotoAttached: "📷 බෝග ඡායාරූපය අමුණා ඇත",
+        chatInputPlaceholder: "ඔබගේ ගැටලුව මෙහි සටහන් කරන්න...",
+        btnSend: "යවන්න",
+        expertDeskTitle: "උපදේශක නිලධාරී පීඨය",
+        expertQueueTitle: "ගොවීන්ගේ ගැටලු පෝලිම",
+        btnOpenChat: "සංවාද ගැබ විවෘත කරන්න →",
+        filterSearchPlaceholder: "මාතෘකාව, ගොවි නම හෝ දිස්ත්‍රික්කය අනුව සොයන්න...",
+        filterAllStatus: "සියලු තත්ත්වයන්",
+        filterPending: "පොරොත්තු",
+        filterInProgress: "සක්‍රීයයි",
+        filterResolved: "විසඳා ඇත",
+        btnIssuePrescription: "📝 ඩිජිටල් ඖෂධ වට්ටෝරුවක් සාදන්න",
+        prescriptionTitle: "නිල කෘෂිකාර්මික ඖෂධ වට්ටෝරුව",
+        prescriptionSelectPreset: "පොදු රෝග විනිශ්චය සැකිල්ලක් තෝරන්න (අභිමතයි)",
+        prescriptionDiagnosis: "රෝගයේ / පලිබෝධයේ නම *",
+        prescriptionTreatment: "නිර්දේශිත ඖෂධය / පිළියම *",
+        prescriptionDosage: "නිවැරදි භාවිත මාත්‍රාව *",
+        prescriptionTiming: "භාවිත කරන වේලාව සහ ආරක්ෂිත ක්‍රම *",
+        btnSubmitPrescription: "ඖෂධ වට්ටෝරුව ගොවි මහතා වෙත යවන්න",
+        btnPrintPrescription: "🖨️ මුද්‍රණය / PDF ලෙස සුරකින්න",
+        btnMarkResolved: "✓ ගැටලුව විසඳූ බව සටහන් කරන්න",
+        playVoiceNote: "🔊 විශේෂඥ නිලධාරියාගේ කටහඬ පණිවිඩයට සවන් දෙන්න (0:45)"
+      }
+    };
+
+    // --- REUSABLE 3D TILT BENTO CARD WRAPPER ---
+    function BentoTiltCard({ children, className = "" }) {
+      const cardRef = useRef(null);
+
+      const handleMouseMove = (e) => {
+        const card = cardRef.current;
+        if (!card) return;
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -6;
+        const rotateY = ((x - centerX) / centerX) * 6;
+
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.01, 1.01, 1.01)`;
+      };
+
+      const handleMouseLeave = () => {
+        const card = cardRef.current;
+        if (!card) return;
+        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+      };
+
+      return (
+        <div
+          ref={cardRef}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+          className={`glass-card p-6 rounded-3xl ${className}`}
+        >
+          {children}
+        </div>
+      );
+    }
+
+    const EXPERT_PROFILES = [
+      {
+        id: "exp_1",
+        name: "Dr. Nimal Jayasinghe",
+        title: "Senior Agronomist & Plant Pathologist",
+        department: "Department of Agriculture - Peradeniya",
+        specialization: "Crop Pest & Disease Control",
+        avatar: "./src/assets/agricultural_expert.png"
+      }
+    ];
+
+    const INITIAL_CONSULTATIONS = [
+      {
+        id: "con_101",
+        ticketId: "GS-2026-089",
+        farmerName: "Sunil Rathnayake",
+        farmerDistrict: "Anuradhapura",
+        title: "Yellowing leaves & brown spots in Maha season paddy crop",
+        cropType: "paddy",
+        cropLabel: "Paddy / Rice",
+        description: "Leaves on my 3-acre paddy field near Kekirawa are turning yellowish brown with elongated dark spots after heavy evening rain.",
+        status: "In Progress",
+        assignedExpert: EXPERT_PROFILES[0],
+        sampleImage: "https://images.unsplash.com/photo-1586771107445-d3ca888129ff?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        id: "con_102",
+        ticketId: "GS-2026-092",
+        farmerName: "Kamal Perera",
+        farmerDistrict: "Kurunegala",
+        title: "Leaf curling & caterpillar damage on young coconut fronds",
+        cropType: "coconut",
+        cropLabel: "Coconut",
+        description: "Lower leaves of young coconut palm trees showing scorched appearance and dried webbing.",
+        status: "Pending",
+        assignedExpert: EXPERT_PROFILES[0],
+        sampleImage: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80"
+      }
+    ];
+
+    const INITIAL_MESSAGES = {
+      "con_101": [
+        {
+          id: "msg_1",
+          senderName: "Sunil Rathnayake",
+          senderRole: "farmer",
+          text: "Hello Doctor! Please help me inspect these paddy leaves. The leaf tips are drying and turned dark brown after rain.",
+          image: "https://images.unsplash.com/photo-1586771107445-d3ca888129ff?auto=format&fit=crop&w=800&q=80",
+          timestamp: "08:00 AM",
+          type: "user"
+        },
+        {
+          id: "msg_2",
+          senderName: "Dr. Nimal Jayasinghe",
+          senderRole: "expert",
+          text: "Hello Mr. Sunil! This symptom pattern strongly indicates early-stage Paddy Blast (Magnaporthe oryzae). I have issued a digital prescription below for your agrarian center.",
+          timestamp: "08:05 AM",
+          type: "expert"
+        },
+        {
+          id: "msg_3",
+          senderName: "Dr. Nimal Jayasinghe",
+          senderRole: "expert",
+          prescription: {
+            title: "Recommended Remedial Action Plan",
+            treatment: "Spray Tricyclazole 75% WP or Edifenphos 50% EC",
+            dosage: "0.6 grams per 1 Liter of clean water",
+            timing: "Apply early morning before 9:00 AM. Avoid rainy conditions."
+          },
+          text: "Please present this digital prescription card at your local Agrarian Service Center.",
+          timestamp: "08:06 AM",
+          type: "prescription"
+        }
+      ]
+    };
+
+    // --- NAVBAR WITH BRAND LOGO, PROFILE DRAWER & THEME TOGGLE ---
+    function Navbar({ activeView, setActiveView, currentLanguage, setCurrentLanguage, currentUser, onLogout, onOpenProfile, themeMode, toggleTheme }) {
+      const t = TRANSLATIONS[currentLanguage] || TRANSLATIONS.en;
+
+      return (
+        <header className="sticky top-0 z-50 glass-nav no-print">
+          <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+            <div className="flex items-center justify-between h-14 sm:h-16">
+              
+              {/* Brand Logo & Subtitle — SVG icon: transparent bg, works on any theme */}
+              <div
+                className="flex items-center gap-2 sm:gap-3 cursor-pointer group py-1 shrink-0"
+                onClick={() => setActiveView(currentUser ? (currentUser.role === 'farmer' ? 'farmer_dashboard' : 'expert_dashboard') : 'landing')}
+              >
+                {/* Exact uploaded logo — white bg blends naturally in light; white pill in dark */}
+                <div style={{
+                  width: '42px', height: '42px',
+                  borderRadius: '50%',
+                  background: themeMode === 'dark' ? 'white' : 'transparent',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  padding: themeMode === 'dark' ? '2px' : '0',
+                  flexShrink: 0,
+                  transition: 'background 0.4s'
+                }}>
+                  <img
+                    src="./src/assets/govisahana_real_logo.png"
+                    alt="GoviSahana Logo"
+                    className="transition-all duration-300 group-hover:scale-110"
+                    style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: '50%' }}
+                  />
+                </div>
+                <div className="flex flex-col justify-center leading-tight">
+                  <span className={`font-black tracking-tight ${
+                    themeMode === 'light' ? 'text-slate-900' : 'text-white'
+                  }`} style={{ fontSize: '1.1rem', lineHeight: 1.1 }}>
+                    GoviSahana
+                  </span>
+                  <span className={`hidden sm:block text-[10px] font-semibold ${
+                    themeMode === 'light' ? 'text-emerald-700' : 'text-emerald-400'
+                  }`} style={{ lineHeight: 1.2 }}>
+                    {t.brandSubtitle}
+                  </span>
+                </div>
+              </div>
+
+              {/* Protected Nav Links */}
+              <nav className="hidden md:flex items-center space-x-1 p-1 rounded-xl border border-emerald-500/20 bg-emerald-950/20">
+                <button
+                  onClick={() => setActiveView('landing')}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
+                    activeView === 'landing' ? 'bg-emerald-700 text-white shadow-sm font-bold' : 'hover:text-emerald-500'
+                  }`}
+                >
+                  {t.navHome}
+                </button>
+
+                {currentUser ? (
+                  <>
+                    {currentUser.role === 'farmer' ? (
+                      <button
+                        onClick={() => setActiveView('farmer_dashboard')}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
+                          activeView === 'farmer_dashboard' ? 'bg-emerald-700 text-white shadow-sm font-bold' : 'hover:text-emerald-500'
+                        }`}
+                      >
+                        {t.navFarmerPortal}
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => setActiveView('expert_dashboard')}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
+                          activeView === 'expert_dashboard' ? 'bg-amber-700 text-white shadow-sm font-bold' : 'hover:text-amber-500'
+                        }`}
+                      >
+                        {t.navExpertDesk}
+                      </button>
+                    )}
+
+                    <button
+                      onClick={() => setActiveView('consultation_room')}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition relative flex items-center gap-1.5 ${
+                        activeView === 'consultation_room' ? 'bg-emerald-700 text-white shadow-sm font-bold' : 'hover:text-emerald-500'
+                      }`}
+                    >
+                      <span>{t.navChatRoom}</span>
+                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                    </button>
+                  </>
+                ) : (
+                  <span className="px-3 py-1.5 text-xs font-bold text-amber-500 bg-amber-950/40 rounded-lg border border-amber-500/30">
+                    {t.navAuthRequired}
+                  </span>
+                )}
+              </nav>
+
+              {/* Action Controls */}
+              <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+                
+                {/* Theme Toggle */}
+                <button
+                  onClick={toggleTheme}
+                  className={`p-1.5 sm:p-2 rounded-xl border text-[11px] sm:text-xs font-bold transition flex items-center gap-1 shrink-0 ${
+                    themeMode === 'light'
+                      ? 'bg-white border-emerald-300 text-slate-900 shadow-sm hover:bg-emerald-50'
+                      : 'border-emerald-500/30 hover:bg-emerald-700/20 text-white'
+                  }`}
+                  title="Toggle Light / Dark Mode"
+                >
+                  <span>{themeMode === 'dark' ? '☀️' : '🌙'}</span>
+                  <span className="hidden sm:inline">{themeMode === 'dark' ? 'Light' : 'Dark'}</span>
+                </button>
+
+                {/* Dynamic Language Toggle */}
+                <div className={`flex items-center p-0.5 sm:p-1 rounded-xl shadow-inner text-[11px] sm:text-xs font-bold border transition shrink-0 ${
+                  themeMode === 'light'
+                    ? 'bg-emerald-100/90 border-emerald-300 text-slate-900'
+                    : 'bg-emerald-950 border-emerald-800 text-white'
+                }`}>
+                  <button
+                    onClick={() => setCurrentLanguage('en')}
+                    className={`px-1.5 py-0.5 sm:px-2.5 sm:py-1 rounded-lg transition ${
+                      currentLanguage === 'en' 
+                        ? (themeMode === 'light' ? 'bg-emerald-700 text-white font-extrabold shadow-sm' : 'bg-emerald-500 text-slate-950 font-black shadow-sm') 
+                        : (themeMode === 'light' ? 'text-emerald-900 hover:text-emerald-950' : 'text-emerald-300 hover:text-white')
+                    }`}
+                  >
+                    <span className="hidden sm:inline">English</span>
+                    <span className="sm:hidden">EN</span>
+                  </button>
+                  <button
+                    onClick={() => setCurrentLanguage('si')}
+                    className={`px-1.5 py-0.5 sm:px-2.5 sm:py-1 rounded-lg transition ${
+                      currentLanguage === 'si' 
+                        ? (themeMode === 'light' ? 'bg-emerald-700 text-white font-extrabold shadow-sm' : 'bg-emerald-500 text-slate-950 font-black shadow-sm') 
+                        : (themeMode === 'light' ? 'text-emerald-900 hover:text-emerald-950' : 'text-emerald-300 hover:text-white')
+                    }`}
+                  >
+                    <span className="hidden sm:inline">සිංහල</span>
+                    <span className="sm:hidden">සිං</span>
+                  </button>
+                </div>
+
+                <div className="flex items-center gap-1 sm:gap-1.5 pl-1 sm:pl-2 border-l border-emerald-500/30 shrink-0">
+                  {currentUser ? (
+                    <div className="flex items-center gap-1.5 sm:gap-2">
+                      <button
+                        onClick={onOpenProfile}
+                        className="px-2 py-1 sm:px-2.5 sm:py-1 rounded-lg text-xs font-bold bg-emerald-700/10 hover:bg-emerald-700/20 border border-emerald-500/30 flex items-center gap-1.5 transition"
+                      >
+                        <span className="w-5 h-5 rounded-full bg-emerald-700 text-white flex items-center justify-center text-[10px] font-black">
+                          {currentUser.name ? currentUser.name[0] : 'U'}
+                        </span>
+                        <span className="hidden sm:inline font-bold">{currentUser.name}</span>
+                      </button>
+                      <button
+                        onClick={onLogout}
+                        className="px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg text-xs font-bold text-red-500 bg-red-950/30 hover:bg-red-900/40 border border-red-500/30 transition shrink-0 whitespace-nowrap"
+                      >
+                        {t.navLogOut}
+                      </button>
+                    </div>
+                  ) : (
+                    <>
+                      <button
+                        onClick={() => setActiveView('login')}
+                        className={`px-1.5 py-1 sm:px-3 sm:py-1.5 rounded-lg text-[11px] sm:text-xs font-bold transition shrink-0 whitespace-nowrap ${
+                          activeView === 'login' 
+                            ? 'bg-emerald-500/20 border border-emerald-500 font-extrabold' 
+                            : (themeMode === 'light' ? 'text-slate-800 hover:bg-emerald-100 border border-emerald-200' : 'text-gray-300 hover:bg-emerald-700/10')
+                        }`}
+                      >
+                        {t.navLogIn}
+                      </button>
+                      <button
+                        onClick={() => setActiveView('signup')}
+                        className="px-2 py-1 sm:px-3.5 sm:py-1.5 rounded-lg text-[11px] sm:text-xs font-black text-white bg-emerald-700 hover:bg-emerald-600 transition shadow-sm shrink-0 whitespace-nowrap"
+                      >
+                        {t.navSignUp}
+                      </button>
+                    </>
+                  )}
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </header>
+      );
+    }
+
+    // --- LANDING PAGE WITH AUTHENTIC SRI LANKAN FARMER & EXPERT PHOTOS ---
+    function LandingPage({ setActiveView, currentLanguage, themeMode }) {
+      const t = TRANSLATIONS[currentLanguage] || TRANSLATIONS.en;
+
+      return (
+        <div className="min-h-screen flex flex-col justify-between">
+          <section className="relative overflow-hidden py-10 sm:py-16 md:py-24 px-3 sm:px-6 lg:px-8">
+            <div className="max-w-6xl mx-auto relative z-10 text-center">
+              
+              {/* Hero Logo — SVG icon (transparent) + theme-adaptive brand text */}
+              <div className="mb-6 sm:mb-8 flex flex-col items-center justify-center gap-3 sm:gap-4">
+                {/* Exact uploaded logo — properly fitted for both themes */}
+                <div style={{
+                  width: '110px', height: '110px',
+                  borderRadius: '50%',
+                  background: themeMode === 'dark' ? 'white' : 'transparent',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  padding: themeMode === 'dark' ? '4px' : '0',
+                  transition: 'background 0.4s',
+                  boxShadow: themeMode === 'dark' ? '0 0 24px rgba(76,200,80,0.25)' : '0 4px 20px rgba(0,0,0,0.10)'
+                }}>
+                  <img
+                    src="./src/assets/govisahana_real_logo.png"
+                    alt="GoviSahana Emblem"
+                    className="transition-all duration-300 hover:scale-105"
+                    style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: '50%' }}
+                  />
+                </div>
+                <div className="flex flex-col items-center" style={{ gap: '4px' }}>
+                  <span
+                    style={{
+                      fontFamily: 'Outfit, sans-serif',
+                      fontWeight: 900,
+                      fontSize: 'clamp(2rem, 6vw, 3.5rem)',
+                      letterSpacing: '-0.03em',
+                      lineHeight: 1,
+                      color: themeMode === 'light' ? '#1a2e1a' : '#ffffff',
+                      transition: 'color 0.4s'
+                    }}
+                  >
+                    GoviSahana
+                  </span>
+                  <span
+                    style={{
+                      fontFamily: 'Outfit, sans-serif',
+                      fontWeight: 600,
+                      fontSize: 'clamp(0.75rem, 2vw, 1rem)',
+                      letterSpacing: '0.04em',
+                      color: themeMode === 'light' ? '#2E7D32' : '#6ee7b7',
+                      transition: 'color 0.4s'
+                    }}
+                  >
+                    Cultivating knowledge, together
+                  </span>
+                </div>
+              </div>
+
+              {/* Badge directly under logo */}
+              <div className={`inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full text-[11px] sm:text-xs font-bold mb-4 sm:mb-6 border transition max-w-full ${
+                themeMode === 'light' 
+                  ? 'bg-emerald-100 border-emerald-300 text-emerald-950 shadow-sm' 
+                  : 'bg-emerald-900/60 border-emerald-500/40 text-emerald-300'
+              }`}>
+                <span className="truncate">{t.heroBadge}</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping shrink-0"></span>
+              </div>
+
+              {/* Main Hero Title directly under logo & badge */}
+              {currentLanguage === 'si' ? (
+                <h1 className="tracking-tight leading-tight mb-4 sm:mb-6 transition">
+                  <span className={`block text-xl sm:text-3xl lg:text-5xl font-black mb-1.5 break-words ${
+                    themeMode === 'light' ? 'text-slate-900' : 'text-white'
+                  }`}>
+                    {t.heroTitleLine1}
+                  </span>
+                  <span className={`block text-base sm:text-2xl lg:text-3xl font-extrabold bg-clip-text text-transparent break-words ${
+                    themeMode === 'light' 
+                      ? 'bg-gradient-to-r from-emerald-800 via-green-700 to-amber-700' 
+                      : 'bg-gradient-to-r from-emerald-400 via-green-300 to-amber-300'
+                  }`}>
+                    {t.heroTitleLine2}
+                  </span>
+                </h1>
+              ) : (
+                <h1 className={`text-2xl sm:text-4xl lg:text-6xl font-black tracking-tight leading-tight mb-4 sm:mb-6 transition break-words ${
+                  themeMode === 'light' ? 'text-slate-900' : 'text-white'
+                }`}>
+                  {t.heroTitleLine1} <br />
+                  <span className={`bg-clip-text text-transparent ${
+                    themeMode === 'light' 
+                      ? 'bg-gradient-to-r from-emerald-800 via-green-700 to-amber-700' 
+                      : 'bg-gradient-to-r from-emerald-400 via-green-300 to-amber-300'
+                  }`}>
+                    {t.heroTitleLine2}
+                  </span>
+                </h1>
+              )}
+
+              {/* Description right under logo & title */}
+              <p className={`max-w-3xl mx-auto text-sm sm:text-base md:text-lg font-medium leading-relaxed mb-4 transition ${
+                themeMode === 'light' ? 'text-slate-700' : 'text-emerald-100/90'
+              }`}>
+                {t.heroDescription}
+              </p>
+
+              {/* Sinhala Tagline right under description */}
+              <p className={`font-extrabold text-sm sm:text-base italic mb-10 transition ${
+                themeMode === 'light' ? 'text-amber-900' : 'text-amber-400'
+              }`}>
+                "{t.sinhalaTagline}"
+              </p>
+
+              {/* Auth Notice Box right under logo section */}
+              <div className={`backdrop-blur-md p-4 rounded-2xl max-w-xl mx-auto mb-12 text-xs font-black shadow-lg border transition ${
+                themeMode === 'light'
+                  ? 'bg-amber-100/90 text-amber-950 border-amber-300 shadow-amber-900/5'
+                  : 'bg-amber-500/20 text-amber-300 border-amber-500/40'
+              }`}>
+                {t.heroAuthNotice}
+              </div>
+
+              {/* 3D Bento Cards featuring Sri Lankan Farmer & Expert Photos */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto text-left">
+                
+                {/* Farmer Bento Card */}
+                <BentoTiltCard className="flex flex-col justify-between group">
+                  <div>
+                    <div className={`relative h-72 sm:h-80 rounded-2xl overflow-hidden mb-6 border shadow-2xl ${
+                      themeMode === 'light' ? 'border-emerald-300 shadow-emerald-900/10' : 'border-emerald-500/40'
+                    }`}>
+                      <img
+                        src="./src/assets/sri_lankan_farmer.png"
+                        alt="Sri Lankan Farmer Face Portrait"
+                        className="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500 brightness-105"
+                      />
+                      <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/90 to-transparent"></div>
+                      
+                      <div className="absolute bottom-3 left-3 flex items-center gap-2 bg-emerald-950/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-emerald-500/50 shadow-lg">
+                        <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span className="text-xs font-bold text-emerald-200">
+                          {t.farmerCardBadge}
+                        </span>
+                      </div>
+                    </div>
+
+                    <h3 className={`text-2xl font-black mb-2 transition ${
+                      themeMode === 'light' ? 'text-slate-900' : 'text-white'
+                    }`}>
+                      {t.farmerCardTitle}
+                    </h3>
+                    <p className={`text-sm mb-6 leading-relaxed transition ${
+                      themeMode === 'light' ? 'text-slate-700 font-medium' : 'text-slate-300 opacity-80'
+                    }`}>
+                      {t.farmerCardDesc}
+                    </p>
+                  </div>
+
+                  <div className="space-y-2">
+                    <button
+                      onClick={() => setActiveView('signup')}
+                      className="w-full py-3.5 px-4 bg-emerald-700 hover:bg-emerald-600 text-white font-black rounded-xl shadow-lg transition flex items-center justify-center gap-2 transform group-hover:scale-[1.01]"
+                    >
+                      <span>{t.farmerCardBtn}</span>
+                      <span>→</span>
+                    </button>
+                    <button
+                      onClick={() => setActiveView('login')}
+                      className={`w-full py-2.5 px-4 font-bold rounded-xl text-xs text-center border transition ${
+                        themeMode === 'light' 
+                          ? 'bg-emerald-100/90 text-emerald-950 hover:bg-emerald-200 border-emerald-300' 
+                          : 'bg-emerald-950/40 text-emerald-400 hover:bg-emerald-900/50 border-emerald-800/60'
+                      }`}
+                    >
+                      {t.farmerCardAltBtn}
+                    </button>
+                  </div>
+                </BentoTiltCard>
+
+                {/* Expert Bento Card */}
+                <BentoTiltCard className="flex flex-col justify-between group">
+                  <div>
+                    <div className={`relative h-72 sm:h-80 rounded-2xl overflow-hidden mb-6 border shadow-2xl ${
+                      themeMode === 'light' ? 'border-amber-300 shadow-amber-900/10' : 'border-amber-500/40'
+                    }`}>
+                      <img
+                        src="./src/assets/agricultural_expert.png"
+                        alt="Agricultural Expert Scientist Face and Tablet"
+                        className="w-full h-full object-cover object-[center_35%] group-hover:scale-105 transition duration-500 brightness-105"
+                      />
+                      <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/80 to-transparent"></div>
+
+                      <div className="absolute bottom-3 left-3 flex items-center gap-2 bg-amber-950/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-amber-500/50 shadow-lg z-10">
+                        <span className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse"></span>
+                        <span className="text-xs font-bold text-amber-200">
+                          {t.expertCardBadge}
+                        </span>
+                      </div>
+                    </div>
+
+                    <h3 className={`text-2xl font-black mb-2 transition ${
+                      themeMode === 'light' ? 'text-slate-900' : 'text-white'
+                    }`}>
+                      {t.expertCardTitle}
+                    </h3>
+                    <p className={`text-sm mb-6 leading-relaxed transition ${
+                      themeMode === 'light' ? 'text-slate-700 font-medium' : 'text-slate-300 opacity-80'
+                    }`}>
+                      {t.expertCardDesc}
+                    </p>
+                  </div>
+
+                  <div className="space-y-2">
+                    <button
+                      onClick={() => setActiveView('signup')}
+                      className="w-full py-3.5 px-4 bg-amber-600 hover:bg-amber-500 text-slate-950 font-black rounded-xl shadow-lg transition flex items-center justify-center gap-2 transform group-hover:scale-[1.01]"
+                    >
+                      <span>{t.expertCardBtn}</span>
+                      <span>→</span>
+                    </button>
+                    <button
+                      onClick={() => setActiveView('login')}
+                      className={`w-full py-2.5 px-4 font-bold rounded-xl text-xs text-center border transition ${
+                        themeMode === 'light' 
+                          ? 'bg-amber-100/90 text-amber-950 hover:bg-amber-200 border-emerald-300' 
+                          : 'bg-amber-950/40 text-amber-400 hover:bg-amber-900/50 border-emerald-800/60'
+                      }`}
+                    >
+                      {t.expertCardAltBtn}
+                    </button>
+                  </div>
+                </BentoTiltCard>
+
+              </div>
+            </div>
+          </section>
+
+          {/* Feature Highlights Grid */}
+          <section className="max-w-6xl mx-auto py-16 px-4">
+            <div className="text-center max-w-2xl mx-auto mb-12">
+              <h2 className={`text-2xl sm:text-3xl font-black mb-2 transition ${
+                themeMode === 'light' ? 'text-slate-900' : 'text-white'
+              }`}>
+                {t.featuresTitle}
+              </h2>
+              <p className={`text-sm transition ${
+                themeMode === 'light' ? 'text-slate-700 font-medium' : 'opacity-70 text-slate-300'
+              }`}>
+                Supporting all 25 Sri Lankan Districts in English & Sinhala.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <BentoTiltCard>
+                <div className="text-4xl mb-4">📷</div>
+                <h4 className={`font-extrabold text-lg mb-2 transition ${
+                  themeMode === 'light' ? 'text-slate-900' : 'text-white'
+                }`}>
+                  {t.feature1Title}
+                </h4>
+                <p className={`text-xs leading-relaxed transition ${
+                  themeMode === 'light' ? 'text-slate-700 font-medium' : 'opacity-80 text-slate-300'
+                }`}>
+                  {t.feature1Desc}
+                </p>
+              </BentoTiltCard>
+
+              <BentoTiltCard>
+                <div className="text-4xl mb-4">🗣️</div>
+                <h4 className={`font-extrabold text-lg mb-2 transition ${
+                  themeMode === 'light' ? 'text-slate-900' : 'text-white'
+                }`}>
+                  {t.feature2Title}
+                </h4>
+                <p className={`text-xs leading-relaxed transition ${
+                  themeMode === 'light' ? 'text-slate-700 font-medium' : 'opacity-80 text-slate-300'
+                }`}>
+                  {t.feature2Desc}
+                </p>
+              </BentoTiltCard>
+
+              <BentoTiltCard>
+                <div className="text-4xl mb-4">📜</div>
+                <h4 className={`font-extrabold text-lg mb-2 transition ${
+                  themeMode === 'light' ? 'text-slate-900' : 'text-white'
+                }`}>
+                  {t.feature3Title}
+                </h4>
+                <p className={`text-xs leading-relaxed transition ${
+                  themeMode === 'light' ? 'text-slate-700 font-medium' : 'opacity-80 text-slate-300'
+                }`}>
+                  {t.feature3Desc}
+                </p>
+              </BentoTiltCard>
+            </div>
+          </section>
+
+          {/* Footer */}
+          <footer className={`py-8 px-4 text-center text-xs border-t transition duration-400 no-print ${
+            themeMode === 'light' ? 'border-emerald-200 bg-white/60 text-slate-800' : 'border-emerald-500/20 text-slate-300'
+          }`}>
+            <div className="max-w-4xl mx-auto space-y-2">
+              <p className={`font-black text-sm ${themeMode === 'light' ? 'text-slate-900' : 'text-white'}`}>
+                {t.footerCopyright}
+              </p>
+              <p className={`font-bold ${themeMode === 'light' ? 'text-emerald-800' : 'text-emerald-400'}`}>
+                {t.footerTagline}
+              </p>
+            </div>
+          </footer>
+        </div>
+      );
+    }
+
+    // --- LOGIN PAGE ---
+    function LoginPage({ setActiveView, onLoginSuccess, currentLanguage, themeMode }) {
+      const isDark = themeMode === 'dark';
+      const t = TRANSLATIONS[currentLanguage] || TRANSLATIONS.en;
+      const [role, setRole] = useState('farmer');
+      const [email, setEmail] = useState('');
+      const [otpStep, setOtpStep] = useState(false);
+      const [enteredOtp, setEnteredOtp] = useState('');
+      const [loading, setLoading] = useState(false);
+      const [error, setError] = useState('');
+      const [resendTimer, setResendTimer] = useState(0);
+
+      // Countdown timer for resend
+      React.useEffect(() => {
+        if (resendTimer > 0) {
+          const t = setTimeout(() => setResendTimer(r => r - 1), 1000);
+          return () => clearTimeout(t);
+        }
+      }, [resendTimer]);
+
+      const handleSendOtp = async (e) => {
+        e.preventDefault();
+        setError('');
+        setLoading(true);
+        try {
+          const res = await fetch('http://localhost:5000/api/otp/send', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email })
+          });
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error || 'Failed to send OTP');
+          setEnteredOtp('');
+          setOtpStep(true);
+          setResendTimer(60);
+        } catch (err) {
+          setError(err.message);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      const handleVerifyOtp = async (e) => {
+        e.preventDefault();
+        setError('');
+        setLoading(true);
+        try {
+          // Verify OTP
+          const verifyRes = await fetch('http://localhost:5000/api/otp/verify', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, code: enteredOtp })
+          });
+          const verifyData = await verifyRes.json();
+          if (!verifyRes.ok) throw new Error(verifyData.error || 'Invalid OTP');
+
+          // Login / get user
+          const loginRes = await fetch('http://localhost:5000/api/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, role })
+          });
+          const loginData = await loginRes.json();
+          onLoginSuccess(loginData.user || { name: 'User', email, role });
+        } catch (err) {
+          setError(err.message);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      const handleResend = async () => {
+        setError('');
+        setLoading(true);
+        try {
+          const res = await fetch('http://localhost:5000/api/otp/send', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email })
+          });
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error || 'Failed to resend OTP');
+          setResendTimer(60);
+          setEnteredOtp('');
+        } catch (err) {
+          setError(err.message);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      return (
+        <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center p-4 py-10">
+          <div className={`max-w-md w-full rounded-3xl border shadow-xl p-6 sm:p-8 space-y-6 ${isDark ? 'bg-emerald-950/80 border-emerald-700/50' : 'bg-white border-slate-200'}`}>
+            {/* Header */}
+            <div className="text-center">
+              <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold border mb-3 ${isDark ? 'bg-emerald-900/50 text-emerald-300 border-emerald-600/40' : 'bg-emerald-50 text-emerald-800 border-emerald-200'}`}>
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse"></span>
+                Official Agritech Portal • Sri Lanka
+              </div>
+              <h2 className={`text-2xl font-black tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>{t.loginTitle}</h2>
+              <p className={`text-xs mt-1 max-w-xs mx-auto leading-relaxed ${isDark ? 'text-emerald-300/70' : 'text-slate-500'}`}>{t.loginSubtitle}</p>
+            </div>
+
+            {/* Role Tabs */}
+            <div>
+              <label className={`block text-xs font-bold mb-2 ${isDark ? 'text-emerald-200' : 'text-slate-700'}`}>{t.loginSelectRole}</label>
+              <div className={`grid grid-cols-2 gap-2 p-1 rounded-2xl border ${isDark ? 'bg-emerald-950/40 border-emerald-700/40' : 'bg-slate-100 border-slate-200'}`}>
+                <button type="button" onClick={() => setRole('farmer')} className={`py-2.5 rounded-xl text-xs font-bold transition-all ${role === 'farmer' ? 'bg-emerald-700 text-white shadow-md' : (isDark ? 'text-emerald-300 hover:text-white' : 'text-slate-600 hover:text-slate-900')}`}>
+                  🌾 Farmer
+                </button>
+                <button type="button" onClick={() => setRole('expert')} className={`py-2.5 rounded-xl text-xs font-bold transition-all ${role === 'expert' ? 'bg-amber-700 text-white shadow-md' : (isDark ? 'text-emerald-300 hover:text-white' : 'text-slate-600 hover:text-slate-900')}`}>
+                  👨‍🌾 Agronomist
+                </button>
+              </div>
+            </div>
+
+            {/* Error Message */}
+            {error && (
+              <div className="bg-red-50 border border-red-200 text-red-700 text-xs font-semibold px-4 py-3 rounded-xl">
+                ⚠️ {error}
+              </div>
+            )}
+
+            {!otpStep ? (
+              /* STEP 1: Enter Email */
+              <form onSubmit={handleSendOtp} className="space-y-4">
+                <div>
+                  <label className={`block text-xs font-bold mb-1.5 ${isDark ? 'text-emerald-200' : 'text-slate-700'}`}>
+                    📧 Email Address
+                  </label>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="your@email.com"
+                    required
+                    className={`w-full px-4 py-3 rounded-2xl border text-sm font-semibold outline-none focus:ring-2 focus:ring-emerald-600/20 transition-all ${isDark ? 'bg-emerald-950/50 text-white border-emerald-600/40 focus:border-emerald-500 placeholder:text-emerald-500/50' : 'bg-slate-50 text-slate-900 border-slate-200 focus:bg-white focus:border-emerald-600 placeholder:text-slate-400'}`}
+                  />
+                  <p className={`text-[10px] mt-1.5 ${isDark ? 'text-emerald-400/60' : 'text-slate-400'}`}>
+                    A 6-digit OTP code will be sent to this email
+                  </p>
+                </div>
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className={`w-full py-3.5 rounded-2xl text-white font-extrabold text-sm shadow transition-all active:scale-[0.99] flex items-center justify-center gap-2 ${role === 'farmer' ? 'bg-emerald-700 hover:bg-emerald-800' : 'bg-amber-700 hover:bg-amber-800'} disabled:opacity-60`}
+                >
+                  {loading ? '⏳ Sending...' : '📧 Send OTP to Email'}
+                </button>
+              </form>
+            ) : (
+              /* STEP 2: Enter OTP */
+              <form onSubmit={handleVerifyOtp} className="space-y-4">
+                <div className={`p-4 rounded-2xl border text-center space-y-3 ${isDark ? 'bg-emerald-950/40 border-emerald-600/40' : 'bg-emerald-50 border-emerald-200'}`}>
+                  <div className="text-2xl">📬</div>
+                  <p className={`text-xs font-bold ${isDark ? 'text-emerald-200' : 'text-slate-800'}`}>
+                    OTP sent to <span className="text-emerald-600">{email}</span>
+                  </p>
+                  <p className={`text-[11px] ${isDark ? 'text-emerald-400/70' : 'text-slate-500'}`}>
+                    Check your inbox (and spam folder). Code expires in 5 minutes.
+                  </p>
+                  <input
+                    type="text"
+                    value={enteredOtp}
+                    onChange={(e) => setEnteredOtp(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                    placeholder="Enter 6-digit code"
+                    required
+                    maxLength="6"
+                    className={`w-full text-center text-2xl font-black tracking-[0.3em] px-4 py-3 rounded-xl border-2 outline-none focus:ring-4 focus:ring-emerald-600/20 shadow-sm transition ${isDark ? 'bg-emerald-950/60 border-emerald-500 text-white placeholder:text-emerald-600/50' : 'bg-white border-emerald-600 text-slate-900 placeholder:text-slate-300'}`}
+                  />
+                  <div className="flex items-center justify-between text-[11px]">
+                    <button
+                      type="button"
+                      onClick={() => { setOtpStep(false); setError(''); setEnteredOtp(''); }}
+                      className={`underline ${isDark ? 'text-emerald-400' : 'text-slate-500'}`}
+                    >
+                      ← Change email
+                    </button>
+                    {resendTimer > 0 ? (
+                      <span className={isDark ? 'text-emerald-500/60' : 'text-slate-400'}>Resend in {resendTimer}s</span>
+                    ) : (
+                      <button type="button" onClick={handleResend} disabled={loading} className={`font-bold underline ${isDark ? 'text-emerald-400' : 'text-emerald-700'}`}>
+                        Resend OTP
+                      </button>
+                    )}
+                  </div>
+                </div>
+                <button
+                  type="submit"
+                  disabled={loading || enteredOtp.length < 6}
+                  className={`w-full py-3.5 rounded-2xl text-white font-extrabold text-sm shadow transition-all active:scale-[0.99] ${role === 'farmer' ? 'bg-emerald-700 hover:bg-emerald-800' : 'bg-amber-700 hover:bg-amber-800'} disabled:opacity-60`}
+                >
+                  {loading ? '⏳ Verifying...' : '✅ Verify & Sign In'}
+                </button>
+              </form>
+            )}
+
+            {/* Footer */}
+            <div className={`pt-4 border-t text-center space-y-2 ${isDark ? 'border-emerald-700/40' : 'border-slate-200'}`}>
+              <div className={`text-xs ${isDark ? 'text-emerald-300/70' : 'text-slate-600'}`}>
+                <span>{t.loginNoAccount} </span>
+                <button onClick={() => setActiveView('signup')} className={`font-extrabold hover:underline transition ${isDark ? 'text-emerald-400' : 'text-emerald-700'}`}>
+                  {t.loginRegisterLink}
+                </button>
+              </div>
+              <p className={`text-[10px] ${isDark ? 'text-emerald-500/50' : 'text-slate-400'}`}>
+                256-Bit Encrypted Sri Lanka Agrarian Database Connection
+              </p>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // --- SIGNUP PAGE ---
+    function SignupPage({ setActiveView, onSignupSuccess, currentLanguage, themeMode }) {
+      const isDark = themeMode === 'dark';
+      const t = TRANSLATIONS[currentLanguage] || TRANSLATIONS.en;
+      const [role, setRole] = useState('farmer');
+      const [name, setName] = useState('');
+      const [email, setEmail] = useState('');
+      const [phone, setPhone] = useState('');
+      const [district, setDistrict] = useState('Anuradhapura');
+      const [cropOrDept, setCropOrDept] = useState('Paddy / Rice (වී)');
+      const [designation, setDesignation] = useState('Plant Pathologist');
+
+      // OTP Step
+      const [otpStep, setOtpStep] = useState(false);
+      const [enteredOtp, setEnteredOtp] = useState('');
+      const [loading, setLoading] = useState(false);
+      const [error, setError] = useState('');
+      const [resendTimer, setResendTimer] = useState(0);
+
+      React.useEffect(() => {
+        if (resendTimer > 0) {
+          const tm = setTimeout(() => setResendTimer(r => r - 1), 1000);
+          return () => clearTimeout(tm);
+        }
+      }, [resendTimer]);
+
+      // Step 1: Send OTP to email
+      const handleSendOtp = async (e) => {
+        e.preventDefault();
+        setError('');
+        setLoading(true);
+        try {
+          const res = await fetch('http://localhost:5000/api/otp/send', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email })
+          });
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error || 'Failed to send OTP');
+          setEnteredOtp('');
+          setOtpStep(true);
+          setResendTimer(60);
+        } catch (err) {
+          setError(err.message);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      // Step 2: Verify OTP then register
+      const handleVerifyAndRegister = async (e) => {
+        e.preventDefault();
+        setError('');
+        setLoading(true);
+        try {
+          // Verify OTP
+          const verifyRes = await fetch('http://localhost:5000/api/otp/verify', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, code: enteredOtp })
+          });
+          const verifyData = await verifyRes.json();
+          if (!verifyRes.ok) throw new Error(verifyData.error || 'Invalid OTP');
+
+          // Register user
+          const userObj = {
+            name: name.trim(),
+            email,
+            phone: phone ? `+94 ${phone.trim()}` : '',
+            role,
+            district,
+            cropOrDept: role === 'farmer' ? cropOrDept : cropOrDept,
+            designation: role === 'expert' ? designation : ''
+          };
+          const regRes = await fetch('http://localhost:5000/api/auth/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(userObj)
+          });
+          const regData = await regRes.json();
+          onSignupSuccess(regData.user || userObj);
+        } catch (err) {
+          setError(err.message);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      const handleResend = async () => {
+        setError('');
+        setLoading(true);
+        try {
+          const res = await fetch('http://localhost:5000/api/otp/send', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email })
+          });
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error || 'Failed to resend OTP');
+          setResendTimer(60);
+          setEnteredOtp('');
+        } catch (err) {
+          setError(err.message);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      return (
+        <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center p-4 py-10">
+          <div className={`max-w-xl w-full rounded-3xl border shadow-xl p-6 sm:p-8 space-y-6 ${isDark ? 'bg-emerald-950/80 border-emerald-700/50' : 'bg-white border-slate-200'}`}>
+            {/* Header */}
+            <div className="text-center">
+              <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold border mb-3 ${isDark ? 'bg-emerald-900/50 text-emerald-300 border-emerald-600/40' : 'bg-emerald-50 text-emerald-800 border-emerald-200'}`}>
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse"></span>
+                Official Registry • Sri Lanka Agrarian Extension
+              </div>
+              <h2 className={`text-2xl sm:text-3xl font-black tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>{t.signupTitle}</h2>
+              <p className={`text-xs sm:text-sm mt-1 max-w-md mx-auto leading-relaxed ${isDark ? 'text-emerald-300/70' : 'text-slate-500'}`}>{t.signupSubtitle}</p>
+            </div>
+
+            {/* Role Tabs */}
+            <div>
+              <label className={`block text-xs font-bold mb-2 ${isDark ? 'text-emerald-200' : 'text-slate-700'}`}>Registration Category:</label>
+              <div className={`grid grid-cols-2 gap-2 p-1 rounded-2xl border ${isDark ? 'bg-emerald-950/40 border-emerald-700/40' : 'bg-slate-100 border-slate-200'}`}>
+                <button type="button" onClick={() => setRole('farmer')} className={`py-3 px-3 rounded-xl text-xs font-bold transition-all text-left flex flex-col gap-0.5 ${role === 'farmer' ? 'bg-emerald-700 text-white shadow-md' : (isDark ? 'text-emerald-300 hover:text-white' : 'text-slate-600 hover:text-slate-900')}`}>
+                  <span className="text-sm">{t.signupRoleFarmer}</span>
+                  <span className={`text-[10px] ${role === 'farmer' ? 'text-emerald-100' : (isDark ? 'text-emerald-400/60' : 'text-slate-500')}`}>Get diagnostic aid & prescriptions</span>
+                </button>
+                <button type="button" onClick={() => setRole('expert')} className={`py-3 px-3 rounded-xl text-xs font-bold transition-all text-left flex flex-col gap-0.5 ${role === 'expert' ? 'bg-amber-700 text-white shadow-md' : (isDark ? 'text-emerald-300 hover:text-white' : 'text-slate-600 hover:text-slate-900')}`}>
+                  <span className="text-sm">{t.signupRoleExpert}</span>
+                  <span className={`text-[10px] ${role === 'expert' ? 'text-amber-100' : (isDark ? 'text-emerald-400/60' : 'text-slate-500')}`}>Diagnose crops & issue treatments</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Error */}
+            {error && (
+              <div className="bg-red-50 border border-red-200 text-red-700 text-xs font-semibold px-4 py-3 rounded-xl">
+                ⚠️ {error}
+              </div>
+            )}
+
+            {!otpStep ? (
+              /* STEP 1: Registration Form */
+              <form onSubmit={handleSendOtp} className="space-y-4">
+
+                {/* Full Name */}
+                <div>
+                  <label className={`block text-xs font-bold mb-1.5 ${isDark ? 'text-emerald-200' : 'text-slate-700'}`}>{t.signupFullName}</label>
+                  <input
+                    type="text" required value={name} onChange={(e) => setName(e.target.value)}
+                    placeholder={role === 'farmer' ? 'e.g. Sunil Rathnayake' : 'e.g. Dr. Nimal Jayasinghe'}
+                    className={`w-full px-4 py-3 rounded-2xl border text-sm font-semibold outline-none focus:ring-2 focus:ring-emerald-600/20 transition-all ${isDark ? 'bg-emerald-950/50 text-white border-emerald-600/40 focus:border-emerald-500 placeholder:text-emerald-500/50' : 'bg-slate-50 text-slate-900 border-slate-200 focus:bg-white focus:border-emerald-600 placeholder:text-slate-400'}`}
+                  />
+                </div>
+
+                {/* Email */}
+                <div>
+                  <label className={`block text-xs font-bold mb-1.5 ${isDark ? 'text-emerald-200' : 'text-slate-700'}`}>📧 Email Address <span className="text-red-500">*</span></label>
+                  <input
+                    type="email" required value={email} onChange={(e) => setEmail(e.target.value)}
+                    placeholder="your@email.com"
+                    className={`w-full px-4 py-3 rounded-2xl border text-sm font-semibold outline-none focus:ring-2 focus:ring-emerald-600/20 transition-all ${isDark ? 'bg-emerald-950/50 text-white border-emerald-600/40 focus:border-emerald-500 placeholder:text-emerald-500/50' : 'bg-slate-50 text-slate-900 border-slate-200 focus:bg-white focus:border-emerald-600 placeholder:text-slate-400'}`}
+                  />
+                  <p className={`text-[10px] mt-1 ${isDark ? 'text-emerald-400/60' : 'text-slate-400'}`}>OTP will be sent to this email to verify your account</p>
+                </div>
+
+                {/* Phone & District */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className={`block text-xs font-bold mb-1.5 ${isDark ? 'text-emerald-200' : 'text-slate-700'}`}>📱 {t.signupMobile}</label>
+                    <div className={`flex rounded-2xl border overflow-hidden transition-all focus-within:ring-2 focus-within:ring-emerald-600/20 ${isDark ? 'bg-emerald-950/50 border-emerald-600/40 focus-within:border-emerald-500' : 'bg-slate-50 border-slate-200 focus-within:bg-white focus-within:border-emerald-600'}`}>
+                      <span className={`px-3.5 py-3 text-xs font-bold border-r shrink-0 flex items-center ${isDark ? 'bg-emerald-950/40 text-emerald-300 border-emerald-600/40' : 'bg-slate-100 text-slate-700 border-slate-200'}`}>
+                        🇱🇰 +94
+                      </span>
+                      <input
+                        type="tel" value={phone} onChange={(e) => setPhone(e.target.value)}
+                        placeholder="77 123 4567"
+                        className={`w-full px-3 py-3 text-sm outline-none font-bold bg-transparent ${isDark ? 'text-white placeholder:text-emerald-500/50' : 'text-slate-900 placeholder:text-slate-400'}`}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className={`block text-xs font-bold mb-1.5 ${isDark ? 'text-emerald-200' : 'text-slate-700'}`}>{t.signupDistrict}</label>
+                    <select value={district} onChange={(e) => setDistrict(e.target.value)}
+                      className={`w-full px-4 py-3 rounded-2xl border text-sm font-semibold outline-none focus:ring-2 focus:ring-emerald-600/20 transition-all cursor-pointer ${isDark ? 'bg-emerald-950/50 text-white border-emerald-600/40 focus:border-emerald-500' : 'bg-slate-50 text-slate-900 border-slate-200 focus:bg-white focus:border-emerald-600'}`}
+                    >
+                      {SRI_LANKAN_DISTRICTS.map(d => (
+                        <option key={d} value={d} className={isDark ? "bg-emerald-900 text-white" : "bg-white text-slate-900"}>{d} District</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                {/* Role Specific Fields */}
+                {role === 'farmer' ? (
+                  <div>
+                    <label className={`block text-xs font-bold mb-1.5 ${isDark ? 'text-emerald-200' : 'text-slate-700'}`}>{t.signupCrops}</label>
+                    <select value={cropOrDept} onChange={(e) => setCropOrDept(e.target.value)}
+                      className={`w-full px-4 py-3 rounded-2xl border text-sm font-semibold outline-none focus:ring-2 focus:ring-emerald-600/20 transition-all cursor-pointer ${isDark ? 'bg-emerald-950/50 text-white border-emerald-600/40 focus:border-emerald-500' : 'bg-slate-50 text-slate-900 border-slate-200 focus:bg-white focus:border-emerald-600'}`}
+                    >
+                      {CROP_CATEGORIES.map(c => (
+                        <option key={c.id} value={c.label} className={isDark ? "bg-emerald-900 text-white" : "bg-white text-slate-900"}>{c.label}</option>
+                      ))}
+                    </select>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className={`block text-xs font-bold mb-1.5 ${isDark ? 'text-emerald-200' : 'text-slate-700'}`}>{t.signupDepartment}</label>
+                      <input type="text" required value={cropOrDept} onChange={(e) => setCropOrDept(e.target.value)}
+                        placeholder="e.g. Department of Agriculture"
+                        className={`w-full px-4 py-3 rounded-2xl border text-sm font-semibold outline-none focus:ring-2 focus:ring-emerald-600/20 transition-all ${isDark ? 'bg-emerald-950/50 text-white border-emerald-600/40 focus:border-emerald-500 placeholder:text-emerald-500/50' : 'bg-slate-50 text-slate-900 border-slate-200 focus:bg-white focus:border-emerald-600 placeholder:text-slate-400'}`}
+                      />
+                    </div>
+                    <div>
+                      <label className={`block text-xs font-bold mb-1.5 ${isDark ? 'text-emerald-200' : 'text-slate-700'}`}>{t.signupDesignation}</label>
+                      <input type="text" required value={designation} onChange={(e) => setDesignation(e.target.value)}
+                        placeholder="e.g. Plant Pathologist"
+                        className={`w-full px-4 py-3 rounded-2xl border text-sm font-semibold outline-none focus:ring-2 focus:ring-emerald-600/20 transition-all ${isDark ? 'bg-emerald-950/50 text-white border-emerald-600/40 focus:border-emerald-500 placeholder:text-emerald-500/50' : 'bg-slate-50 text-slate-900 border-slate-200 focus:bg-white focus:border-emerald-600 placeholder:text-slate-400'}`}
+                      />
+                    </div>
+                  </div>
+                )}
+
+                <div className={`p-3.5 rounded-xl border text-[11px] leading-relaxed ${isDark ? 'bg-emerald-950/30 border-emerald-600/30 text-emerald-300/80' : 'bg-slate-50 border-slate-200 text-slate-600'}`}>
+                  By registering, you agree to receive official agricultural advisory notices & digital diagnostic services from GoviSahana.
+                </div>
+
+                <button type="submit" disabled={loading}
+                  className={`w-full py-4 rounded-2xl text-white font-extrabold text-sm shadow transition-all active:scale-[0.99] flex items-center justify-center gap-2 ${role === 'farmer' ? 'bg-emerald-700 hover:bg-emerald-800' : 'bg-amber-700 hover:bg-amber-800'} disabled:opacity-60`}
+                >
+                  {loading ? '⏳ Sending OTP...' : '📧 Send Verification Code to Email'}
+                </button>
+              </form>
+            ) : (
+              /* STEP 2: OTP Verification */
+              <form onSubmit={handleVerifyAndRegister} className="space-y-4">
+                <div className={`p-5 rounded-2xl border text-center space-y-3 ${isDark ? 'bg-emerald-950/40 border-emerald-600/40' : 'bg-emerald-50 border-emerald-200'}`}>
+                  <div className="text-3xl">📬</div>
+                  <p className={`text-sm font-bold ${isDark ? 'text-white' : 'text-slate-800'}`}>Check your email!</p>
+                  <p className={`text-xs ${isDark ? 'text-emerald-300/70' : 'text-slate-500'}`}>
+                    We sent a 6-digit code to <span className="font-bold text-emerald-600">{email}</span>
+                  </p>
+                  <p className={`text-[11px] ${isDark ? 'text-emerald-400/60' : 'text-slate-400'}`}>
+                    Also check your spam/junk folder. Code expires in 5 minutes.
+                  </p>
+                  <input
+                    type="text"
+                    value={enteredOtp}
+                    onChange={(e) => setEnteredOtp(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                    placeholder="Enter 6-digit code"
+                    required maxLength="6"
+                    className={`w-full text-center text-2xl font-black tracking-[0.3em] px-4 py-3 rounded-xl border-2 outline-none focus:ring-4 focus:ring-emerald-600/20 shadow-sm transition ${isDark ? 'bg-emerald-950/60 border-emerald-500 text-white placeholder:text-emerald-600/50' : 'bg-white border-emerald-600 text-slate-900 placeholder:text-slate-300'}`}
+                  />
+                  <div className="flex items-center justify-between text-[11px] pt-1">
+                    <button type="button" onClick={() => { setOtpStep(false); setError(''); setEnteredOtp(''); }}
+                      className={`underline ${isDark ? 'text-emerald-400' : 'text-slate-500'}`}>
+                      ← Edit details
+                    </button>
+                    {resendTimer > 0 ? (
+                      <span className={isDark ? 'text-emerald-500/60' : 'text-slate-400'}>Resend in {resendTimer}s</span>
+                    ) : (
+                      <button type="button" onClick={handleResend} disabled={loading}
+                        className={`font-bold underline ${isDark ? 'text-emerald-400' : 'text-emerald-700'}`}>
+                        Resend OTP
+                      </button>
+                    )}
+                  </div>
+                </div>
+                <button type="submit" disabled={loading || enteredOtp.length < 6}
+                  className={`w-full py-4 rounded-2xl text-white font-extrabold text-sm shadow transition-all active:scale-[0.99] ${role === 'farmer' ? 'bg-emerald-700 hover:bg-emerald-800' : 'bg-amber-700 hover:bg-amber-800'} disabled:opacity-60`}
+                >
+                  {loading ? '⏳ Creating Account...' : '✅ Verify & Create Account'}
+                </button>
+              </form>
+            )}
+
+            {/* Login Link Footer */}
+            <div className={`pt-4 border-t text-center space-y-2 ${isDark ? 'border-emerald-700/40' : 'border-slate-200'}`}>
+              <div className={`text-xs ${isDark ? 'text-emerald-300/70' : 'text-slate-600'}`}>
+                <span>{t.signupHasAccount} </span>
+                <button onClick={() => setActiveView('login')} className={`font-extrabold hover:underline transition ${isDark ? 'text-emerald-400' : 'text-emerald-700'}`}>
+                  {t.signupLoginLink}
+                </button>
+              </div>
+              <p className={`text-[10px] ${isDark ? 'text-emerald-500/50' : 'text-slate-400'}`}>
+                Encrypted Sri Lanka Agrarian Extension Database Connection
+              </p>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // --- FARMER DASHBOARD ---
+    function FarmerDashboard({ currentUser, consultations, onOpenNewTicketModal, onSelectConsultation, setActiveView, currentLanguage, themeMode }) {
+      const t = TRANSLATIONS[currentLanguage] || TRANSLATIONS.en;
+      const [searchQuery, setSearchQuery] = useState('');
+      const [statusFilter, setStatusFilter] = useState('all');
+      const isDark = themeMode === 'dark';
+
+      const filteredConsultations = consultations.filter(item => {
+        const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                              item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                              item.cropLabel.toLowerCase().includes(searchQuery.toLowerCase());
+        const matchesStatus = statusFilter === 'all' || item.status.toLowerCase().replace(' ', '') === statusFilter.toLowerCase().replace(' ', '');
+        return matchesSearch && matchesStatus;
+      });
+
+      const pendingCount = consultations.filter(c => c.status === 'Pending').length;
+      const resolvedCount = consultations.filter(c => c.status === 'Resolved').length;
+
+      return (
+        <div className="min-h-screen pb-16">
+          {/* Dashboard Top Banner */}
+          <div className="bg-gradient-to-r from-emerald-900 via-emerald-800 to-emerald-950 text-white py-8 px-4 sm:px-6 lg:px-8 border-b border-emerald-700/50 shadow-lg relative overflow-hidden">
+            <div className="absolute right-0 top-0 bottom-0 opacity-10 pointer-events-none flex items-center pr-8">
+              <svg className="w-96 h-96 text-emerald-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3zm0 2.84L18 11v7h-2v-6H8v6H6v-7l6-5.16z"/></svg>
+            </div>
+
+            <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
+              <div>
+                <div className="flex items-center gap-2 mb-2 flex-wrap">
+                  <span className="text-xs bg-emerald-700/80 text-emerald-100 font-bold px-3 py-1 rounded-full border border-emerald-500/50 shadow-sm flex items-center gap-1.5">
+                    <svg className="w-3.5 h-3.5 text-emerald-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    {currentUser?.district || 'Anuradhapura'} District
+                  </span>
+                  <span className="text-xs bg-amber-400/20 text-amber-200 font-bold px-3 py-1 rounded-full border border-amber-400/30">
+                    {t.dashboardSeason}
+                  </span>
+                </div>
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-white">
+                  {t.dashboardGreeting}, {currentUser?.name || 'Sunil Rathnayake'}!
+                </h1>
+                <p className="text-xs sm:text-sm text-emerald-200 mt-1 font-medium flex items-center gap-2">
+                  <svg className="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                  {t.dashboardVerifiedBadge} • {currentUser?.phone || '+94 77 555 1212'}
+                </p>
+              </div>
+
+              {/* High Contrast Primary Action Button */}
+              <button
+                onClick={onOpenNewTicketModal}
+                className="group inline-flex items-center justify-center gap-3 px-6 py-4 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-base sm:text-lg rounded-2xl shadow-xl transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0 ring-4 ring-amber-400/30 cursor-pointer shrink-0"
+              >
+                <div className="w-9 h-9 rounded-xl bg-slate-950 text-white flex items-center justify-center text-xl font-bold shadow">
+                  +
+                </div>
+                <div className="text-left leading-tight">
+                  <span className="block text-xs uppercase tracking-wider font-black text-slate-800">{t.needCropAdvice}</span>
+                  <span className="block text-base sm:text-lg font-black text-slate-950">{t.btnRequestConsultation}</span>
+                </div>
+              </button>
+            </div>
+          </div>
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 space-y-8">
+
+            {/* Weather Advisory & Live Market Ticker */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {/* Weather Bulletin */}
+              <BentoTiltCard className="lg:col-span-2 !p-5">
+                <div className="flex items-center justify-between gap-4 mb-3 pb-3 border-b border-emerald-500/20">
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-lg bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 15a4 4 0 004 4h9a5 5 0 00-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/></svg>
+                    </div>
+                    <div>
+                      <h3 className="text-sm font-bold tracking-tight">Agro-Climate Advisory ({currentUser?.district || 'Anuradhapura'})</h3>
+                      <p className="text-[11px] opacity-70">Department of Meteorology & Agrarian Services</p>
+                    </div>
+                  </div>
+                  <span className="text-[11px] bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 font-bold px-2.5 py-1 rounded-full border border-emerald-500/20">
+                    Soil Hum: 78%
+                  </span>
+                </div>
+                <p className="text-xs sm:text-sm font-medium leading-relaxed opacity-90">
+                  <strong className="text-emerald-600 dark:text-emerald-400 font-extrabold">Forecast:</strong> Moderate rainfall expected across North-Central dry zone over next 48 hours. Hold off on broadcast nitrogen fertilizer application until clear weather resumes to prevent runoff.
+                </p>
+              </BentoTiltCard>
+
+              {/* Market Price Ticker */}
+              <BentoTiltCard className="!p-5">
+                <div className="flex items-center justify-between gap-2 mb-3 pb-3 border-b border-emerald-500/20">
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-lg bg-amber-500/15 text-amber-600 dark:text-amber-400 flex items-center justify-center font-bold">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+                    </div>
+                    <h3 className="text-sm font-bold tracking-tight">Live Market Rates</h3>
+                  </div>
+                  <span className="text-[10px] uppercase font-bold opacity-60">Dambulla Economic Center</span>
+                </div>
+                <div className="grid grid-cols-2 gap-2 text-xs">
+                  <div className={`p-2 rounded-lg border flex justify-between items-center ${
+                    themeMode === 'light' ? 'bg-emerald-50 border-emerald-200' : 'bg-emerald-950/40 border-emerald-500/20'
+                  }`}>
+                    <span className="opacity-80 font-medium">Paddy (Samba)</span>
+                    <span className={`font-extrabold ${ themeMode === 'light' ? 'text-emerald-800' : 'text-emerald-400' }`}>Rs. 125/kg ↑</span>
+                  </div>
+                  <div className={`p-2 rounded-lg border flex justify-between items-center ${
+                    themeMode === 'light' ? 'bg-emerald-50 border-emerald-200' : 'bg-emerald-950/40 border-emerald-500/20'
+                  }`}>
+                    <span className="opacity-80 font-medium">Tea Leaf</span>
+                    <span className={`font-extrabold ${ themeMode === 'light' ? 'text-emerald-800' : 'text-emerald-400' }`}>Rs. 240/kg ↑</span>
+                  </div>
+                  <div className={`p-2 rounded-lg border flex justify-between items-center ${
+                    themeMode === 'light' ? 'bg-emerald-50 border-emerald-200' : 'bg-emerald-950/40 border-emerald-500/20'
+                  }`}>
+                    <span className="opacity-80 font-medium">Coconut</span>
+                    <span className={`font-extrabold ${ themeMode === 'light' ? 'text-emerald-800' : 'text-emerald-400' }`}>Rs. 95/nut ↑</span>
+                  </div>
+                  <div className={`p-2 rounded-lg border flex justify-between items-center ${
+                    themeMode === 'light' ? 'bg-emerald-50 border-emerald-200' : 'bg-emerald-950/40 border-emerald-500/20'
+                  }`}>
+                    <span className="opacity-80 font-medium">Black Pepper</span>
+                    <span className={`font-extrabold ${ themeMode === 'light' ? 'text-emerald-800' : 'text-emerald-400' }`}>Rs. 1,450/kg</span>
+                  </div>
+                </div>
+              </BentoTiltCard>
+            </div>
+
+            {/* Metrics Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <BentoTiltCard className="!p-5 flex items-center gap-4">
+                <div className="w-12 h-12 rounded-2xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-xl border border-emerald-500/20 shrink-0">
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                </div>
+                <div>
+                  <p className="text-2xl sm:text-3xl font-black">{consultations.length}</p>
+                  <p className="text-xs font-semibold opacity-70">{t.statActiveChats}</p>
+                </div>
+              </BentoTiltCard>
+
+              <BentoTiltCard className="!p-5 flex items-center gap-4">
+                <div className="w-12 h-12 rounded-2xl bg-amber-500/15 text-amber-600 dark:text-amber-400 flex items-center justify-center font-bold text-xl border border-amber-500/20 shrink-0">
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                </div>
+                <div>
+                  <p className="text-2xl sm:text-3xl font-black">{pendingCount}</p>
+                  <p className="text-xs font-semibold opacity-70">{t.statPendingRequests}</p>
+                </div>
+              </BentoTiltCard>
+
+              <BentoTiltCard className="!p-5 flex items-center gap-4">
+                <div className="w-12 h-12 rounded-2xl bg-blue-500/15 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold text-xl border border-blue-500/20 shrink-0">
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                </div>
+                <div>
+                  <p className="text-2xl sm:text-3xl font-black">{resolvedCount}</p>
+                  <p className="text-xs font-semibold opacity-70">{t.statResolvedCases}</p>
+                </div>
+              </BentoTiltCard>
+
+              <BentoTiltCard className="!p-5 flex items-center gap-4">
+                <div className="w-12 h-12 rounded-2xl bg-purple-500/15 text-purple-600 dark:text-purple-400 flex items-center justify-center font-bold text-xl border border-purple-500/20 shrink-0">
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                </div>
+                <div>
+                  <p className="text-2xl sm:text-3xl font-black">2</p>
+                  <p className="text-xs font-semibold opacity-70">{t.statAssignedOfficers}</p>
+                </div>
+              </BentoTiltCard>
+            </div>
+
+            {/* Consultations Requests Main Card */}
+            <BentoTiltCard className="!p-6">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-4 border-b border-emerald-500/20">
+                <div>
+                  <h2 className="text-xl font-black tracking-tight">{t.dashboardSectionTitle}</h2>
+                  <p className="text-xs opacity-70 mt-0.5">Track and communicate with verified agronomists</p>
+                </div>
+
+                {/* Filter & Search Toolbar */}
+                <div className="flex flex-col sm:flex-row items-center gap-2.5">
+                  <div className="relative w-full sm:w-64">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none opacity-50">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                    </div>
+                    <input
+                      type="text"
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      placeholder={t.filterSearchPlaceholder}
+                      className="pl-9 pr-3.5 py-2.5 rounded-xl text-xs border border-slate-300 dark:border-emerald-500/30 outline-none w-full bg-white dark:bg-emerald-950/40 text-slate-900 dark:text-emerald-100 font-medium placeholder-slate-400 dark:placeholder-emerald-500/50 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition"
+                    />
+                  </div>
+
+                  <select
+                    value={statusFilter}
+                    onChange={(e) => setStatusFilter(e.target.value)}
+                    className="px-3.5 py-2.5 rounded-xl text-xs border border-slate-300 dark:border-emerald-500/30 outline-none bg-white dark:bg-emerald-950/50 text-slate-900 dark:text-emerald-100 font-bold w-full sm:w-auto cursor-pointer focus:border-emerald-500 transition shadow-sm"
+                  >
+                    <option value="all">{t.filterAllStatus}</option>
+                    <option value="pending">{t.filterPending}</option>
+                    <option value="inprogress">{t.filterInProgress}</option>
+                    <option value="resolved">{t.filterResolved}</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Consultation Cards List */}
+              <div className="space-y-4">
+                {filteredConsultations.length === 0 ? (
+                  <div className="text-center py-12 p-6 rounded-2xl border border-dashed border-slate-300 dark:border-emerald-500/30 bg-slate-50/50 dark:bg-emerald-950/10">
+                    <svg className="w-12 h-12 mx-auto text-slate-400 dark:text-emerald-600 mb-3 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <p className="font-bold text-base opacity-80 mb-1">No Consultation Requests Found</p>
+                    <p className="text-xs opacity-60 max-w-sm mx-auto">No crop queries match your search query or status filter. Click "REQUEST CONSULTATION" above to create a new ticket.</p>
+                  </div>
+                ) : (
+                  filteredConsultations.map(item => {
+                    const isResolved = item.status === 'Resolved';
+                    const isPending = item.status === 'Pending';
+                    return (
+                      <div 
+                        key={item.id} 
+                        className={`p-5 rounded-2xl border transition-all duration-200 flex flex-col md:flex-row md:items-center justify-between gap-5 hover:border-emerald-500/50 hover:shadow-md group ${
+                          themeMode === 'light' ? 'border-slate-200 bg-white/80' : 'border-emerald-500/20 bg-emerald-950/30'
+                        }`}
+                      >
+                        <div className="flex items-start gap-4">
+                          <div className="relative shrink-0">
+                            <img 
+                              src={item.sampleImage} 
+                              alt="Crop sample" 
+                              className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover border border-slate-300 dark:border-emerald-500/30 shadow-md group-hover:scale-105 transition-transform duration-300" 
+                            />
+                            <span className="absolute -bottom-1 -right-1 bg-emerald-600 text-white rounded-lg p-1 text-[10px]">
+                              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                            </span>
+                          </div>
+
+                          <div className="space-y-1">
+                            <div className="flex items-center gap-2 flex-wrap">
+                              <span className={`text-[11px] font-mono font-bold tracking-wider opacity-70 px-2 py-0.5 rounded ${
+                                themeMode === 'light' ? 'bg-slate-200 text-slate-700' : 'bg-emerald-900/40 text-emerald-300'
+                              }`}>
+                                {item.ticketId}
+                              </span>
+                              <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-800 border border-emerald-500/20">
+                                {item.cropLabel}
+                              </span>
+                              <span className={`text-xs font-bold px-2.5 py-0.5 rounded-full border ${
+                                isResolved 
+                                  ? 'bg-blue-500/10 text-blue-800 border-blue-500/30' 
+                                  : isPending 
+                                  ? 'bg-amber-500/10 text-amber-800 border-amber-500/30' 
+                                  : 'bg-emerald-500/10 text-emerald-800 border-emerald-500/30'
+                              }`}>
+                                {item.status}
+                              </span>
+                            </div>
+
+                            <h3 className={`font-extrabold text-base sm:text-lg transition-colors ${ themeMode === 'light' ? 'group-hover:text-emerald-700' : 'group-hover:text-emerald-400' }`}>
+                              {item.title}
+                            </h3>
+                            <p className="text-xs opacity-75 line-clamp-2 leading-relaxed">
+                              {item.description}
+                            </p>
+                          </div>
+                        </div>
+
+                        <button
+                          onClick={() => { onSelectConsultation(item.id); setActiveView('consultation_room'); }}
+                          className="px-5 py-3 bg-emerald-700 hover:bg-emerald-600 text-white font-bold rounded-xl text-xs shadow-md transition-all duration-200 flex items-center justify-center gap-2 shrink-0 group-hover:bg-emerald-600"
+                        >
+                          <span>{t.btnJoinChatRoom}</span>
+                          <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                        </button>
+                      </div>
+                    );
+                  })
+                )}
+              </div>
+            </BentoTiltCard>
+          </div>
+        </div>
+      );
+    }
+
+    // --- NEW TICKET MODAL ---
+    function NewTicketModal({ isOpen, onClose, onSubmitTicket, currentUser, currentLanguage }) {
+      const t = TRANSLATIONS[currentLanguage] || TRANSLATIONS.en;
+      const [title, setTitle] = useState('');
+      const [cropType, setCropType] = useState('Paddy / Rice (වී)');
+      const [description, setDescription] = useState('');
+      const [photoPreview, setPhotoPreview] = useState(null);
+
+      if (!isOpen) return null;
+
+      const handlePhoto = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onloadend = () => setPhotoPreview(reader.result);
+          reader.readAsDataURL(file);
+        }
+      };
+
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        if (!title || !description) return;
+        onSubmitTicket({
+          id: `con_${Date.now()}`,
+          ticketId: `GS-2026-${Math.floor(100 + Math.random() * 900)}`,
+          farmerName: currentUser?.name || 'Sunil Rathnayake',
+          farmerDistrict: currentUser?.district || 'Anuradhapura',
+          title,
+          cropType: 'crop',
+          cropLabel: cropType,
+          description,
+          status: 'In Progress',
+          assignedExpert: EXPERT_PROFILES[0],
+          createdAt: 'Just now',
+          sampleImage: photoPreview || 'https://images.unsplash.com/photo-1586771107445-d3ca888129ff?auto=format&fit=crop&w=800&q=80'
+        });
+        onClose();
+      };
+
+      return (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn">
+          <BentoTiltCard className="w-full max-w-xl !p-0 overflow-hidden shadow-2xl">
+            <div className="bg-gradient-to-r from-emerald-900 to-emerald-800 p-5 text-white flex items-center justify-between border-b border-emerald-700">
+              <h3 className="font-extrabold text-lg text-white">{t.modalTitle}</h3>
+              <button onClick={onClose} className="w-8 h-8 rounded-full bg-emerald-900 text-white font-bold text-sm">✕</button>
+            </div>
+            <form onSubmit={handleSubmit} className="p-6 space-y-4">
+              <div>
+                <label className="block text-xs font-bold opacity-80 mb-1">{t.modalIssueTitle}</label>
+                <input type="text" required value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Yellow leaf spots on paddy crop" className="w-full px-3.5 py-2.5 rounded-xl border border-emerald-500/30 text-sm outline-none font-semibold bg-transparent" />
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold opacity-80 mb-1">{t.modalCropType}</label>
+                <select value={cropType} onChange={(e) => setCropType(e.target.value)} className="w-full px-3.5 py-2.5 rounded-xl border border-emerald-500/30 text-sm outline-none bg-emerald-900/60 font-medium">
+                  {CROP_CATEGORIES.map(c => <option key={c.id} value={c.label}>{c.label}</option>)}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold opacity-80 mb-1">{t.modalDesc}</label>
+                <textarea required rows="3" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Describe crop leaf symptoms, affected acreage, and duration..." className="w-full px-3.5 py-2.5 rounded-xl border border-emerald-500/30 text-sm outline-none bg-transparent"></textarea>
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold opacity-80 mb-1">{t.modalUploadPhoto}</label>
+                <div className="border-2 border-dashed border-emerald-500/40 rounded-2xl p-4 bg-emerald-700/10 text-center relative cursor-pointer hover:bg-emerald-700/20 transition">
+                  <input type="file" accept="image/*" onChange={handlePhoto} className="absolute inset-0 opacity-0 cursor-pointer w-full h-full" />
+                  {photoPreview ? (
+                    <img src={photoPreview} alt="Preview" className="max-h-36 rounded-xl mx-auto shadow" />
+                  ) : (
+                    <div>
+                      <span className="text-3xl">📷</span>
+                      <p className="text-xs font-bold text-emerald-500 mt-1">{t.modalUploadPhotoHint}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <button type="submit" className="w-full py-3 bg-emerald-700 hover:bg-emerald-600 text-white font-black rounded-xl shadow-lg transition">
+                {t.modalSubmit}
+              </button>
+            </form>
+          </BentoTiltCard>
+        </div>
+      );
+    }
+
+    // --- CONSULTATION ROOM WITH PRESCRIPTION GENERATOR & PRINT SUPPORT ---
+    function ConsultationRoom({ consultation, messages, onSendMessage, onMarkResolved, onBackToDashboard, currentUser, currentLanguage }) {
+      const t = TRANSLATIONS[currentLanguage] || TRANSLATIONS.en;
+      const [text, setText] = useState('');
+      const [photo, setPhoto] = useState(null);
+      const [isPrescriptionModalOpen, setIsPrescriptionModalOpen] = useState(false);
+      const [prescriptionDiagnosis, setPrescriptionDiagnosis] = useState('');
+      const [prescriptionTreatment, setPrescriptionTreatment] = useState('');
+      const [prescriptionDosage, setPrescriptionDosage] = useState('');
+      const [prescriptionTiming, setPrescriptionTiming] = useState('');
+
+      const handleSend = (e) => {
+        e.preventDefault();
+        if (!text.trim() && !photo) return;
+        onSendMessage(consultation.id, {
+          id: `msg_${Date.now()}`,
+          senderName: currentUser?.name || 'Sunil Rathnayake',
+          senderRole: currentUser?.role || 'farmer',
+          text,
+          image: photo,
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+          type: 'user'
+        });
+        setText('');
+        setPhoto(null);
+      };
+
+      const handlePresetSelect = (preset) => {
+        setPrescriptionDiagnosis(preset.name);
+        setPrescriptionTreatment(preset.treatment);
+        setPrescriptionDosage(preset.dosage);
+        setPrescriptionTiming(preset.timing);
+      };
+
+      const handleIssuePrescription = (e) => {
+        e.preventDefault();
+        if (!prescriptionDiagnosis || !prescriptionTreatment) return;
+        onSendMessage(consultation.id, {
+          id: `msg_rx_${Date.now()}`,
+          senderName: currentUser?.name || 'Dr. Nimal Jayasinghe',
+          senderRole: 'expert',
+          prescription: {
+            title: `Official Remedy Card: ${prescriptionDiagnosis}`,
+            treatment: prescriptionTreatment,
+            dosage: prescriptionDosage,
+            timing: prescriptionTiming,
+            issuedBy: currentUser?.name || 'Dr. Nimal Jayasinghe',
+            date: new Date().toLocaleDateString()
+          },
+          text: "Official Agronomist Remedy Prescription issued for local Agrarian Service Center.",
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+          type: 'prescription'
+        });
+        setIsPrescriptionModalOpen(false);
+      };
+
+      const expert = consultation.assignedExpert || EXPERT_PROFILES[0];
+
+      return (
+        <div className="h-[calc(100vh-4rem)] flex flex-col">
+          
+          {/* Header Controls */}
+          <div className="glass-nav border-b border-emerald-500/20 p-4 shadow-sm flex items-center justify-between no-print">
+            <div className="flex items-center gap-3">
+              <button onClick={onBackToDashboard} className="px-3 py-1.5 rounded-xl border border-emerald-500/30 font-bold text-xs hover:bg-emerald-700/10 transition">{t.chatDashboardBack}</button>
+              <div className="flex items-center gap-3 border-l border-emerald-500/20 pl-3">
+                <img src={expert.avatar} alt={expert.name} className="w-10 h-10 rounded-full object-cover border-2 border-emerald-500" />
+                <div>
+                  <h3 className="font-extrabold text-sm">{expert.name} <span className="text-[10px] bg-emerald-700/20 text-emerald-500 px-1.5 py-0.5 rounded border border-emerald-500/30">{t.chatOfficerBadge}</span></h3>
+                  <p className="text-xs opacity-70">{expert.specialization} • {expert.department}</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2">
+              {currentUser?.role === 'expert' && (
+                <>
+                  <button onClick={() => setIsPrescriptionModalOpen(true)} className="px-3 py-1.5 bg-amber-700 hover:bg-amber-600 text-white font-bold text-xs rounded-xl shadow transition">
+                    {t.btnIssuePrescription}
+                  </button>
+                  <button onClick={() => onMarkResolved(consultation.id)} className="px-3 py-1.5 bg-blue-700 hover:bg-blue-600 text-white font-bold text-xs rounded-xl shadow transition">
+                    {t.btnMarkResolved}
+                  </button>
+                </>
+              )}
+              <button onClick={() => alert("Connecting direct voice line with Agronomist...")} className="px-3 py-1.5 bg-emerald-700 hover:bg-emerald-600 text-white font-bold text-xs rounded-xl shadow transition">{t.btnVoiceCall}</button>
+            </div>
+          </div>
+
+          {/* Main Messages Stream */}
+          <div className="flex-1 overflow-y-auto p-4 space-y-4 chat-scroll">
+            <div className="max-w-3xl mx-auto space-y-4">
+              
+              {/* Voice Note Simulator Pill */}
+              <div className="bg-emerald-950/40 p-3 rounded-2xl border border-emerald-500/30 flex items-center justify-between no-print">
+                <div className="flex items-center gap-2 text-xs font-bold text-emerald-300">
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                  <span>{t.playVoiceNote}</span>
+                </div>
+                <button onClick={() => alert("Playing audio explanation from Agronomist in Sinhala...")} className="px-3 py-1 bg-emerald-700 text-white font-bold text-xs rounded-lg shadow">▶ Play Audio</button>
+              </div>
+
+              {messages.map(msg => (
+                msg.type === 'prescription' ? (
+                  <div key={msg.id} className="printable-prescription bg-amber-950/40 border-2 border-amber-500/50 rounded-2xl p-5 shadow-xl max-w-xl mx-auto">
+                    <div className="flex items-center justify-between border-b border-amber-500/30 pb-3 mb-3">
+                      <div>
+                        <span className="text-[10px] font-black uppercase text-amber-500 bg-amber-950 px-2 py-0.5 rounded border border-amber-700">Official Agronomist Remedy Card</span>
+                        <h4 className="font-black text-amber-300 text-base mt-1">{msg.prescription.title}</h4>
+                      </div>
+                      <button onClick={() => window.print()} className="no-print px-3 py-1 bg-amber-700 text-slate-950 font-black text-xs rounded-lg shadow hover:bg-amber-600 transition">
+                        {t.btnPrintPrescription}
+                      </button>
+                    </div>
+
+                    <div className="space-y-2 text-xs">
+                      <div>
+                        <span className="font-extrabold text-amber-400">Target Treatment / Chemical:</span>
+                        <p className="font-bold text-white text-sm bg-amber-950/60 p-2 rounded-xl border border-amber-500/20 mt-0.5">{msg.prescription.treatment}</p>
+                      </div>
+                      <div>
+                        <span className="font-extrabold text-amber-400">Mixing Ratio & Dosage:</span>
+                        <p className="font-semibold text-amber-100 opacity-90">{msg.prescription.dosage}</p>
+                      </div>
+                      <div>
+                        <span className="font-extrabold text-amber-400">Timing & Safety Warnings:</span>
+                        <p className="font-semibold text-amber-100 opacity-90">{msg.prescription.timing}</p>
+                      </div>
+                    </div>
+
+                    <div className="mt-4 pt-3 border-t border-amber-500/20 flex items-center justify-between text-[11px] font-bold text-amber-400">
+                      <span>Issued By: {msg.prescription.issuedBy || expert.name}</span>
+                      <span>{msg.prescription.date || 'Today'}</span>
+                    </div>
+                  </div>
+                ) : (
+                  <div key={msg.id} className={`flex ${msg.senderRole === 'farmer' ? 'justify-end' : 'justify-start'}`}>
+                    <div className={`max-w-md rounded-2xl p-3.5 shadow-md ${msg.senderRole === 'farmer' ? 'bg-emerald-700 text-white font-medium' : 'bg-emerald-950/80 text-white border border-emerald-500/40'}`}>
+                      <div className="text-[10px] opacity-80 font-bold mb-1">{msg.senderName} • {msg.timestamp}</div>
+                      {msg.image && <img src={msg.image} alt="Crop photo" className="rounded-xl max-h-56 w-full object-cover mb-2 border border-emerald-500/40 shadow" />}
+                      <p className="text-xs sm:text-sm font-medium leading-relaxed">{msg.text}</p>
+                    </div>
+                  </div>
+                )
+              ))}
+            </div>
+          </div>
+
+          {/* Photo attachment footer bar */}
+          {photo && (
+            <div className="bg-emerald-700/20 p-2 px-4 border-t border-emerald-500/20 flex items-center justify-between no-print">
+              <span className="text-xs font-bold text-emerald-400">{t.chatPhotoAttached}</span>
+              <button onClick={() => setPhoto(null)} className="text-xs text-red-500 font-bold hover:underline">Remove</button>
+            </div>
+          )}
+
+          {/* Message Input Controls */}
+          <div className="glass-nav border-t border-emerald-500/20 p-3 no-print">
+            <form onSubmit={handleSend} className="max-w-3xl mx-auto flex gap-2">
+              <label className="p-2.5 rounded-xl bg-emerald-700/20 border border-emerald-500/30 cursor-pointer hover:bg-emerald-700/30 transition">
+                <input type="file" accept="image/*" onChange={(e) => {
+                  const file = e.target.files[0];
+                  if (file) {
+                    const reader = new FileReader();
+                    reader.onloadend = () => setPhoto(reader.result);
+                    reader.readAsDataURL(file);
+                  }
+                }} className="hidden" />
+                📷
+              </label>
+              <input type="text" value={text} onChange={(e) => setText(e.target.value)} placeholder={t.chatInputPlaceholder} className="flex-1 px-4 py-2 rounded-xl border border-emerald-500/30 text-xs sm:text-sm outline-none font-medium bg-transparent" />
+              <button type="submit" className="px-5 py-2 bg-emerald-700 hover:bg-emerald-600 text-white font-black text-xs rounded-xl shadow transition">{t.btnSend}</button>
+            </form>
+          </div>
+
+          {/* Prescription Modal for Experts */}
+          {isPrescriptionModalOpen && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn no-print">
+              <BentoTiltCard className="w-full max-w-xl !p-0 overflow-hidden shadow-2xl">
+                <div className="bg-gradient-to-r from-amber-950 to-amber-900 p-5 text-white flex items-center justify-between border-b border-amber-800">
+                  <h3 className="font-extrabold text-lg text-white">{t.prescriptionTitle}</h3>
+                  <button onClick={() => setIsPrescriptionModalOpen(false)} className="w-8 h-8 rounded-full bg-amber-900 text-white font-bold text-sm">✕</button>
+                </div>
+
+                <form onSubmit={handleIssuePrescription} className="p-6 space-y-4">
+                  <div>
+                    <label className="block text-xs font-bold text-amber-400 mb-1">{t.prescriptionSelectPreset}</label>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {PRESET_DIAGNOSES.map((p, i) => (
+                        <button
+                          key={i}
+                          type="button"
+                          onClick={() => handlePresetSelect(p)}
+                          className="p-2 text-left bg-amber-950/40 hover:bg-amber-900/60 rounded-xl border border-amber-500/30 text-[11px] font-bold text-amber-200 transition"
+                        >
+                          ⚡ {p.name}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold opacity-80 mb-1">{t.prescriptionDiagnosis}</label>
+                    <input type="text" required value={prescriptionDiagnosis} onChange={(e) => setPrescriptionDiagnosis(e.target.value)} placeholder="Paddy Blast (Magnaporthe oryzae)" className="w-full px-3.5 py-2.5 rounded-xl border border-emerald-500/30 text-sm outline-none font-semibold bg-transparent" />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold opacity-80 mb-1">{t.prescriptionTreatment}</label>
+                    <input type="text" required value={prescriptionTreatment} onChange={(e) => setPrescriptionTreatment(e.target.value)} placeholder="Spray Tricyclazole 75% WP" className="w-full px-3.5 py-2.5 rounded-xl border border-emerald-500/30 text-sm outline-none font-semibold bg-transparent" />
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-xs font-bold opacity-80 mb-1">{t.prescriptionDosage}</label>
+                      <input type="text" required value={prescriptionDosage} onChange={(e) => setPrescriptionDosage(e.target.value)} placeholder="0.6g per 1L water" className="w-full px-3.5 py-2.5 rounded-xl border border-emerald-500/30 text-sm outline-none font-semibold bg-transparent" />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold opacity-80 mb-1">{t.prescriptionTiming}</label>
+                      <input type="text" value={prescriptionTiming} onChange={(e) => setPrescriptionTiming(e.target.value)} placeholder="Early morning before 9 AM" className="w-full px-3.5 py-2.5 rounded-xl border border-emerald-500/30 text-sm outline-none font-semibold bg-transparent" />
+                    </div>
+                  </div>
+
+                  <button type="submit" className="w-full py-3 bg-amber-600 hover:bg-amber-500 text-slate-950 font-black rounded-xl shadow-lg transition">
+                    {t.btnSubmitPrescription}
+                  </button>
+                </form>
+              </BentoTiltCard>
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    // --- EXPERT DASHBOARD ---
+    function ExpertDashboard({ currentUser, consultations, onSelectConsultation, setActiveView, currentLanguage, themeMode }) {
+      const t = TRANSLATIONS[currentLanguage] || TRANSLATIONS.en;
+      const [districtFilter, setDistrictFilter] = useState('all');
+      const [searchQuery, setSearchQuery] = useState('');
+      const [statusFilter, setStatusFilter] = useState('all');
+
+      const filtered = consultations.filter(c => {
+        const matchesDistrict = districtFilter === 'all' || c.farmerDistrict === districtFilter;
+        const matchesSearch = c.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                              c.farmerName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                              c.ticketId.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                              c.cropLabel.toLowerCase().includes(searchQuery.toLowerCase());
+        const matchesStatus = statusFilter === 'all' || c.status.toLowerCase().replace(' ', '') === statusFilter.toLowerCase().replace(' ', '');
+        return matchesDistrict && matchesSearch && matchesStatus;
+      });
+
+      const pendingCount = consultations.filter(c => c.status === 'Pending').length;
+      const inProgressCount = consultations.filter(c => c.status === 'In Progress').length;
+      const resolvedCount = consultations.filter(c => c.status === 'Resolved').length;
+
+      return (
+        <div className="min-h-screen pb-16">
+          {/* Expert Hero Header */}
+          <div className="bg-gradient-to-r from-slate-900 via-emerald-950 to-amber-950 text-white py-8 px-4 sm:px-6 lg:px-8 border-b border-amber-900/50 shadow-xl relative overflow-hidden">
+            <div className="absolute right-0 top-0 bottom-0 opacity-10 pointer-events-none flex items-center pr-8">
+              <svg className="w-96 h-96 text-amber-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+            </div>
+
+            <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
+              <div>
+                <div className="flex items-center gap-2 mb-2 flex-wrap">
+                  <span className="text-xs bg-amber-500/20 text-amber-300 font-bold px-3 py-1 rounded-full border border-amber-500/40 shadow-sm flex items-center gap-1.5">
+                    <svg className="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                    {t.expertDeskTitle}
+                  </span>
+                  <span className="text-xs bg-emerald-500/20 text-emerald-300 font-bold px-3 py-1 rounded-full border border-emerald-500/40">
+                    Extension Division • Peradeniya
+                  </span>
+                </div>
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-white">
+                  {currentUser?.name || 'Dr. Nimal Jayasinghe'}
+                </h1>
+                <p className="text-xs sm:text-sm text-amber-200/80 mt-1 font-medium">
+                  {currentUser?.cropOrDept || 'Senior Agronomist & Plant Pathologist'}
+                </p>
+              </div>
+
+              {/* District Selector Header Filter */}
+              <div className="flex items-center gap-3 shrink-0">
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-amber-300">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                  </div>
+                  <select
+                    value={districtFilter}
+                    onChange={(e) => setDistrictFilter(e.target.value)}
+                    className="pl-9 pr-4 py-3 rounded-xl text-xs font-black bg-slate-900/90 text-amber-100 border border-amber-500/40 outline-none cursor-pointer shadow-lg hover:border-amber-400 transition"
+                  >
+                    <option value="all">All Sri Lankan Districts ({SRI_LANKAN_DISTRICTS.length})</option>
+                    {SRI_LANKAN_DISTRICTS.map(d => <option key={d} value={d}>{d} District</option>)}
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 space-y-8">
+            {/* Quick Metrics Bar */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <BentoTiltCard className="!p-5 flex items-center gap-4">
+                <div className="w-12 h-12 rounded-2xl bg-amber-500/15 text-amber-600 dark:text-amber-400 flex items-center justify-center font-bold text-xl border border-amber-500/20 shrink-0">
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+                </div>
+                <div>
+                  <p className="text-2xl sm:text-3xl font-black">{consultations.length}</p>
+                  <p className="text-xs font-semibold opacity-70">Total Queries</p>
+                </div>
+              </BentoTiltCard>
+
+              <BentoTiltCard className="!p-5 flex items-center gap-4">
+                <div className="w-12 h-12 rounded-2xl bg-red-500/15 text-red-600 dark:text-red-400 flex items-center justify-center font-bold text-xl border border-red-500/20 shrink-0">
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                </div>
+                <div>
+                  <p className="text-2xl sm:text-3xl font-black">{pendingCount}</p>
+                  <p className="text-xs font-semibold opacity-70">Action Required</p>
+                </div>
+              </BentoTiltCard>
+
+              <BentoTiltCard className="!p-5 flex items-center gap-4">
+                <div className="w-12 h-12 rounded-2xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-xl border border-emerald-500/20 shrink-0">
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                </div>
+                <div>
+                  <p className="text-2xl sm:text-3xl font-black">{inProgressCount}</p>
+                  <p className="text-xs font-semibold opacity-70">Active Consultations</p>
+                </div>
+              </BentoTiltCard>
+
+              <BentoTiltCard className="!p-5 flex items-center gap-4">
+                <div className="w-12 h-12 rounded-2xl bg-blue-500/15 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold text-xl border border-blue-500/20 shrink-0">
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                </div>
+                <div>
+                  <p className="text-2xl sm:text-3xl font-black">{resolvedCount}</p>
+                  <p className="text-xs font-semibold opacity-70">Resolved Cases</p>
+                </div>
+              </BentoTiltCard>
+            </div>
+
+            {/* Queue Card */}
+            <BentoTiltCard className="!p-6">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-4 border-b border-amber-500/20">
+                <div>
+                  <h2 className="text-xl font-black tracking-tight">{t.expertQueueTitle}</h2>
+                  <p className="text-xs opacity-70 mt-0.5">Review, inspect crop photos, and prescribe remote agrarian solutions</p>
+                </div>
+
+                {/* Toolbar */}
+                <div className="flex flex-col sm:flex-row items-center gap-2.5">
+                  <div className="relative w-full sm:w-64">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none opacity-50">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                    </div>
+                    <input
+                      type="text"
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      placeholder={t.filterSearchPlaceholder}
+                      className="pl-9 pr-3.5 py-2.5 rounded-xl text-xs border border-slate-300 dark:border-emerald-500/30 outline-none w-full bg-white dark:bg-emerald-950/40 text-slate-900 dark:text-emerald-100 font-medium placeholder-slate-400 dark:placeholder-emerald-500/50 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 transition"
+                    />
+                  </div>
+
+                  <select
+                    value={statusFilter}
+                    onChange={(e) => setStatusFilter(e.target.value)}
+                    className="px-3.5 py-2.5 rounded-xl text-xs border border-slate-300 dark:border-emerald-500/30 outline-none bg-white dark:bg-emerald-950/50 text-slate-900 dark:text-emerald-100 font-bold w-full sm:w-auto cursor-pointer focus:border-amber-500 transition shadow-sm"
+                  >
+                    <option value="all">{t.filterAllStatus}</option>
+                    <option value="pending">{t.filterPending}</option>
+                    <option value="inprogress">{t.filterInProgress}</option>
+                    <option value="resolved">{t.filterResolved}</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Items Queue */}
+              <div className="space-y-4">
+                {filtered.length === 0 ? (
+                  <div className="text-center py-12 p-6 rounded-2xl border border-dashed border-slate-300 dark:border-amber-500/30 bg-slate-50/50 dark:bg-emerald-950/10">
+                    <svg className="w-12 h-12 mx-auto text-amber-500 mb-3 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                    <p className="font-bold text-base opacity-80 mb-1">No Farmer Queries Match Your Filter</p>
+                    <p className="text-xs opacity-60 max-w-sm mx-auto">Try clearing search keywords or selecting a different district filter.</p>
+                  </div>
+                ) : (
+                  filtered.map(c => (
+                    <div 
+                      key={c.id} 
+                      className={`p-5 rounded-2xl border transition-all duration-200 flex flex-col md:flex-row md:items-center justify-between gap-5 hover:border-amber-500/50 hover:shadow-md group ${
+                        themeMode === 'light' ? 'border-slate-200 bg-white/80' : 'border-emerald-500/20 bg-emerald-950/30'
+                      }`}
+                    >
+                      <div className="flex items-start gap-4">
+                        <img 
+                          src={c.sampleImage} 
+                          alt="Farmer crop request" 
+                          className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover border border-slate-300 dark:border-emerald-500/30 shadow-md group-hover:scale-105 transition-transform duration-300 shrink-0" 
+                        />
+                        <div className="space-y-1">
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <span className={`text-[11px] font-bold bg-amber-500/10 px-2.5 py-0.5 rounded-full border border-amber-500/30 flex items-center gap-1 ${
+                              themeMode === 'light' ? 'text-amber-800' : 'text-amber-300'
+                            }`}>
+                              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg>
+                              {c.farmerDistrict}
+                            </span>
+                            <span className={`text-xs font-bold bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/30 ${
+                              themeMode === 'light' ? 'text-emerald-800' : 'text-emerald-300'
+                            }`}>
+                              {c.cropLabel}
+                            </span>
+                            <span className={`text-xs font-mono opacity-70 px-2 py-0.5 rounded ${
+                              themeMode === 'light' ? 'bg-slate-200 text-slate-700' : 'bg-emerald-900/40 text-emerald-300'
+                            }`}>
+                              {c.ticketId}
+                            </span>
+                          </div>
+                          <h3 className={`font-extrabold text-base sm:text-lg transition-colors ${ themeMode === 'light' ? 'group-hover:text-amber-700' : 'group-hover:text-amber-400' }`}>
+                            {c.title}
+                          </h3>
+                          <p className="text-xs opacity-75 font-medium">
+                            Farmer: <strong className="font-extrabold">{c.farmerName}</strong> • Status: <span className={`font-bold ${ themeMode === 'light' ? 'text-amber-700' : 'text-amber-400' }`}>{c.status}</span>
+                          </p>
+                        </div>
+                      </div>
+
+                      <button
+                        onClick={() => { onSelectConsultation(c.id); setActiveView('consultation_room'); }}
+                        className="px-5 py-3 bg-amber-600 hover:bg-amber-500 text-slate-950 font-black text-xs rounded-xl shadow-md transition-all duration-200 flex items-center justify-center gap-2 shrink-0 group-hover:bg-amber-500"
+                      >
+                        <span>{t.btnOpenChat}</span>
+                        <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                      </button>
+                    </div>
+                  ))
+                )}
+              </div>
+            </BentoTiltCard>
+          </div>
+        </div>
+      );
+    }
+
+    // --- USER PROFILE MODAL ---
+    function UserProfileModal({ isOpen, onClose, currentUser, onLogout }) {
+      if (!isOpen || !currentUser) return null;
+
+      return (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn no-print">
+          <BentoTiltCard className="w-full max-w-md !p-0 overflow-hidden shadow-2xl">
+            <div className="bg-gradient-to-r from-emerald-900 to-emerald-800 p-6 text-white text-center border-b border-emerald-700 relative">
+              <button onClick={onClose} className="absolute top-4 right-4 w-8 h-8 rounded-full bg-emerald-950 text-white font-bold text-sm">✕</button>
+              <div className="w-16 h-16 rounded-full bg-emerald-600 text-white flex items-center justify-center text-2xl font-black mx-auto mb-2 border-2 border-white shadow-lg">
+                {currentUser.name ? currentUser.name[0] : 'U'}
+              </div>
+              <h3 className="text-xl font-black text-white">{currentUser.name}</h3>
+              <p className="text-xs text-emerald-200 capitalize font-bold">{currentUser.role} Account • {currentUser.district} District</p>
+            </div>
+
+            <div className="p-6 space-y-4">
+              <div className="space-y-2 text-xs">
+                <div className="p-3 bg-emerald-950/40 rounded-xl border border-emerald-500/20 flex justify-between">
+                  <span className="opacity-70 font-bold">Mobile Phone:</span>
+                  <span className="font-extrabold text-emerald-400">{currentUser.phone}</span>
+                </div>
+                <div className="p-3 bg-emerald-950/40 rounded-xl border border-emerald-500/20 flex justify-between">
+                  <span className="opacity-70 font-bold">District / Location:</span>
+                  <span className="font-extrabold text-emerald-400">{currentUser.district}</span>
+                </div>
+                <div className="p-3 bg-emerald-950/40 rounded-xl border border-emerald-500/20 flex justify-between">
+                  <span className="opacity-70 font-bold">{currentUser.role === 'farmer' ? 'Primary Crop:' : 'Institution / Department:'}</span>
+                  <span className="font-extrabold text-emerald-400">{currentUser.cropOrDept || 'N/A'}</span>
+                </div>
+              </div>
+
+              <button
+                onClick={() => { onLogout(); onClose(); }}
+                className="w-full py-3 bg-red-900/40 hover:bg-red-900/60 text-red-400 font-extrabold text-xs rounded-xl border border-red-500/30 transition shadow"
+              >
+                Log Out of Account
+              </button>
+            </div>
+          </BentoTiltCard>
+        </div>
+      );
+    }
+
+    // --- MAIN APP WITH PERSISTENCE & MULTI-ROLE STATE ---
+    function App() {
+      const [currentUser, setCurrentUser] = useState(() => {
+        try {
+          const saved = localStorage.getItem('govisahana_active_user');
+          return saved ? JSON.parse(saved) : null;
+        } catch (e) {
+          return null;
+        }
+      });
+      const [activeView, setActiveView] = useState('landing');
+      const [currentLanguage, setCurrentLanguage] = useState('en');
+      const [themeMode, setThemeMode] = useState('light');
+      const [isProfileOpen, setIsProfileOpen] = useState(false);
+
+      useEffect(() => {
+        document.body.className = `${themeMode}-mode lang-${currentLanguage}`;
+        document.documentElement.lang = currentLanguage;
+      }, [themeMode, currentLanguage]);
+
+      const toggleTheme = () => {
+        setThemeMode(prev => prev === 'dark' ? 'light' : 'dark');
+      };
+
+      const [consultations, setConsultations] = useState(() => {
+        try {
+          const saved = localStorage.getItem('govisahana_consultations');
+          return saved ? JSON.parse(saved) : INITIAL_CONSULTATIONS;
+        } catch (e) {
+          return INITIAL_CONSULTATIONS;
+        }
+      });
+
+      const [messages, setMessages] = useState(() => {
+        try {
+          const saved = localStorage.getItem('govisahana_messages');
+          return saved ? JSON.parse(saved) : INITIAL_MESSAGES;
+        } catch (e) {
+          return INITIAL_MESSAGES;
+        }
+      });
+
+      useEffect(() => {
+        fetch('http://localhost:5000/api/consultations')
+          .then(res => res.json())
+          .then(data => {
+            if (Array.isArray(data) && data.length > 0) {
+              setConsultations(data);
+            }
+          })
+          .catch(() => {});
+      }, []);
+
+      useEffect(() => {
+        try {
+          localStorage.setItem('govisahana_consultations', JSON.stringify(consultations));
+        } catch (e) {}
+      }, [consultations]);
+
+      useEffect(() => {
+        try {
+          localStorage.setItem('govisahana_messages', JSON.stringify(messages));
+        } catch (e) {}
+      }, [messages]);
+
+      const [activeConsultationId, setActiveConsultationId] = useState('con_101');
+      const [isTicketModalOpen, setIsTicketModalOpen] = useState(false);
+
+      const handleAuthSuccess = (userObj) => {
+        setCurrentUser(userObj);
+        try {
+          localStorage.setItem('govisahana_active_user', JSON.stringify(userObj));
+        } catch (e) {}
+        setActiveView(userObj && userObj.role === 'expert' ? 'expert_dashboard' : 'farmer_dashboard');
+      };
+
+      const handleLogout = () => {
+        setCurrentUser(null);
+        try {
+          localStorage.removeItem('govisahana_active_user');
+        } catch (e) {}
+        setActiveView('landing');
+      };
+
+      const handleCreateTicket = (newTicket) => {
+        setConsultations([newTicket, ...consultations]);
+        setMessages({
+          ...messages,
+          [newTicket.id]: [
+            {
+              id: `msg_init_${Date.now()}`,
+              senderName: newTicket.farmerName,
+              senderRole: 'farmer',
+              text: `Consultation Ticket Created: ${newTicket.description}`,
+              image: newTicket.sampleImage,
+              timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+              type: 'user'
+            }
+          ]
+        });
+
+        fetch('http://localhost:5000/api/consultations', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(newTicket)
+        }).catch(() => {});
+
+        setActiveConsultationId(newTicket.id);
+        setActiveView('farmer_dashboard');
+      };
+
+      const handleSendMessage = (consultationId, newMessage) => {
+        const existing = messages[consultationId] || [];
+        setMessages({
+          ...messages,
+          [consultationId]: [...existing, newMessage]
+        });
+      };
+
+      const handleMarkResolved = (consultationId) => {
+        setConsultations(consultations.map(c => c.id === consultationId ? { ...c, status: 'Resolved' } : c));
+      };
+
+      const activeConsultation = consultations.find(c => c.id === activeConsultationId) || consultations[0];
+      const activeChatMessages = messages[activeConsultationId] || [];
+
+      return (
+        <div className="min-h-screen flex flex-col">
+          <Navbar
+            activeView={activeView}
+            setActiveView={setActiveView}
+            currentLanguage={currentLanguage}
+            setCurrentLanguage={setCurrentLanguage}
+            currentUser={currentUser}
+            onLogout={handleLogout}
+            onOpenProfile={() => setIsProfileOpen(true)}
+            themeMode={themeMode}
+            toggleTheme={toggleTheme}
+          />
+
+          <main className="flex-1">
+            {activeView === 'landing' && <LandingPage setActiveView={setActiveView} currentLanguage={currentLanguage} themeMode={themeMode} />}
+            {activeView === 'login' && <LoginPage setActiveView={setActiveView} onLoginSuccess={handleAuthSuccess} currentLanguage={currentLanguage} themeMode={themeMode} />}
+            {activeView === 'signup' && <SignupPage setActiveView={setActiveView} onSignupSuccess={handleAuthSuccess} currentLanguage={currentLanguage} themeMode={themeMode} />}
+
+            {activeView === 'farmer_dashboard' && (
+              currentUser ? (
+                <FarmerDashboard
+                  currentUser={currentUser}
+                  consultations={consultations}
+                  onOpenNewTicketModal={() => setIsTicketModalOpen(true)}
+                  onSelectConsultation={(id) => setActiveConsultationId(id)}
+                  setActiveView={setActiveView}
+                  currentLanguage={currentLanguage}
+                  themeMode={themeMode}
+                />
+              ) : (
+                <LoginPage setActiveView={setActiveView} onLoginSuccess={handleAuthSuccess} currentLanguage={currentLanguage} themeMode={themeMode} />
+              )
+            )}
+
+            {activeView === 'consultation_room' && (
+              currentUser ? (
+                <ConsultationRoom
+                  currentUser={currentUser}
+                  consultation={activeConsultation}
+                  messages={activeChatMessages}
+                  onSendMessage={handleSendMessage}
+                  onMarkResolved={handleMarkResolved}
+                  onBackToDashboard={() => setActiveView(currentUser && currentUser.role === 'expert' ? 'expert_dashboard' : 'farmer_dashboard')}
+                  currentLanguage={currentLanguage}
+                  themeMode={themeMode}
+                />
+              ) : (
+                <LoginPage setActiveView={setActiveView} onLoginSuccess={handleAuthSuccess} currentLanguage={currentLanguage} themeMode={themeMode} />
+              )
+            )}
+
+            {activeView === 'expert_dashboard' && (
+              currentUser ? (
+                <ExpertDashboard
+                  currentUser={currentUser}
+                  consultations={consultations}
+                  onSelectConsultation={(id) => setActiveConsultationId(id)}
+                  setActiveView={setActiveView}
+                  currentLanguage={currentLanguage}
+                  themeMode={themeMode}
+                />
+              ) : (
+                <LoginPage setActiveView={setActiveView} onLoginSuccess={handleAuthSuccess} currentLanguage={currentLanguage} themeMode={themeMode} />
+              )
+            )}
+
+            {!['landing', 'login', 'signup', 'farmer_dashboard', 'consultation_room', 'expert_dashboard'].includes(activeView) && (
+              <LandingPage setActiveView={setActiveView} currentLanguage={currentLanguage} themeMode={themeMode} />
+            )}
+          </main>
+
+          <NewTicketModal
+            isOpen={isTicketModalOpen}
+            onClose={() => setIsTicketModalOpen(false)}
+            onSubmitTicket={handleCreateTicket}
+            currentUser={currentUser}
+            currentLanguage={currentLanguage}
+            themeMode={themeMode}
+          />
+
+          <UserProfileModal
+            isOpen={isProfileOpen}
+            onClose={() => setIsProfileOpen(false)}
+            currentUser={currentUser}
+            onLogout={handleLogout}
+          />
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
